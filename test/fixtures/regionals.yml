@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  agent: one
+  name: MyString
+  company: MyString
+
+two:
+  agent: two
+  name: MyString
+  company: MyString

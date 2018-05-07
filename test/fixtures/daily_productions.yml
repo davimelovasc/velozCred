@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  agent: one
+  goal: 1.5
+  value: 1.5
+  miss: 1.5
+  miss_percent: 1.5
+  goal_du: 1.5
+  miss_du: 1.5
+  du_percent: 1.5
+
+two:
+  agent: two
+  goal: 1.5
+  value: 1.5
+  miss: 1.5
+  miss_percent: 1.5
+  goal_du: 1.5
+  miss_du: 1.5
+  du_percent: 1.5

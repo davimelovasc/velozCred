@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  segment: one
+  agent: one
+  year_month: 2018-05-07
+  goal: 1.5
+  production_value: 1.5
+  goal_percent: 1.5
+  remuneration: 1.5
+  remunaration_percent: 1.5
+
+two:
+  segment: two
+  agent: two
+  year_month: 2018-05-07
+  goal: 1.5
+  production_value: 1.5
+  goal_percent: 1.5
+  remuneration: 1.5
+  remunaration_percent: 1.5
