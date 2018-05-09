@@ -12,11 +12,10 @@ class Agent < ActiveRecord::Base
 
 
   validates :name, presence: true
-  validates :key_j, presence: true, length: {is: 6}
+  validates :key_j, presence: true, length: {is: 8}
   validates :cpf, presence: true, length: {is: 11}
   validates :role, presence: true
   validates :uf, presence: true
-  validates :prefix, length: {is: 6}
   validates :cost_help, inclusion: { in: [true, false] }
 
 end

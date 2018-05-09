@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507112027) do
+ActiveRecord::Schema.define(version: 20180509104116) do
 
   create_table "agents", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20180507112027) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_changed", default: false
     t.index ["email"], name: "index_agents_on_email", unique: true
     t.index ["regional_id"], name: "index_agents_on_regional_id"
     t.index ["reset_password_token"], name: "index_agents_on_reset_password_token", unique: true
