@@ -1,13 +1,22 @@
 class AgentsController < ApplicationController
+  layout :resolve_layout
+
 
   def index
   end
 
-  def new
-    @agent = Agent.new
+  def edit_password
   end
 
-  def edit_password
+  private
+
+  def resolve_layout
+    case action_name
+    when "edit_password"
+      "forms"
+    else
+      "application"
+    end
   end
 
 end

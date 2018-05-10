@@ -33,7 +33,6 @@ $( document ).ready(function() {
   $("#new_agent").submit( function() {
     var key_j = $("#inputEmail").val();
     key_j = key_j.toUpperCase();
-    alert("key j: "+ key_j);
     $("#inputEmail").val(key_j);
   });
 

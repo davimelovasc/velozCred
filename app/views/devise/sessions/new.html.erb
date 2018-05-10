@@ -1,5 +1,4 @@
-<!-- agent_session_path -->
-<%= form_for(@agent, as: :agent, url: session_path(:agent), html: { class: "form-signin" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f| %>
 <%= image_tag("logo.jpg", class:"mb-4 logo", width: "100%", height: "72") %>
 
 <%= f.label :key_j, class: 'sr-only' %>
