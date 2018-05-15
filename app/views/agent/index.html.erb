@@ -1,16 +1,18 @@
+<!-- form_for -->
+
 <div class="container-fluid">
   <div class="row">
 
-    <div class="col-md-3">
+    <div class="col-md-3" style="padding: 2vh 5vh;">
 
       <div class="row">
         <div class="col-md-12">
           <h3>Cargo</h3>
-          <table class="display responsive no-wrap table table-hover" width="100%" id="cargoTable">
+          <table class="table table-sm display responsive no-wrap" width="100%" id="cargoTable">
             <thead>
               <tr>
                 <th></th>
-                <th>Cargo</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -23,16 +25,39 @@
       <div class="row">
         <div class="col-md-12">
           <h3>Ano/Mês</h3>
+          <table class="table table-sm display responsive no-wrap" width="100%" id="anoMesTable">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
         </div>
       </div>
 
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3" style="padding: 2vh 5vh;">
 
       <div class="row">
         <div class="col-md-12">
           <h3>Segmentos</h3>
+          <table class="table table-sm display responsive no-wrap" width="100%" id="segmentoTable">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -40,17 +65,21 @@
         <div class="col-md-12">
           <h3>Regionais</h3>
 
-          <table class="display responsive no-wrap table table-hover" width="100%" id="regionalsTable">
+          <table class="table table-sm display responsive no-wrap" width="100%" id="regionalsTable">
             <thead>
               <tr>
                 <th></th>
-                <th>Nome</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td><input name="regionals" type="checkbox" id="regionalsAll"></td>
+                <td><label for="regionalsAll">Todos (as)</label></td>
+              </tr>
               <% @regionals.each do |r| %>
               <tr>
-                <td><input name="regionals" type="checkbox" id= "<%= r.name %>"> </td>
+                <td><input name="regionals" type="checkbox" value="<%= r.name %>" id="<%= r.name %>"> </td>
                 <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
               </tr>
 
@@ -65,54 +94,88 @@
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6" style="padding: 2vh 5vh;">
 
       <h3>Agentes</h3>
 
-      <table class="display responsive no-wrap table table-hover" width="100%" id="agentesTable">
+      <table class="table table-sm display responsive no-wrap" width="100%" id="agentesTable">
         <thead>
           <tr>
             <th></th>
-            <th>Nome</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><input name="agents" type="checkbox" id="todosAgentes"></td>
-            <td><label for="todosAgentes">Todos(as)</td>
-          </tr>
-          <% @agents.each do |r| %>
-          <tr>
-            <td><input name="agents" type="checkbox" id= "<%= r.name %>" ></td>
-            <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
-          </tr>
+            <td><input name="agents" type="checkbox" id="agentsAll"></td>
+            <td><label for="agentsAll">Todos (as)</td>
+            </tr>
+            <% @agents.each do |r| %>
+            <tr>
+              <td><input name="agents" type="checkbox" id= "<%= r.name %>" ></td>
+              <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
+            </tr>
 
-          <% end %>
-        </tbody>
-      </table>
+            <% end %>
+          </tbody>
+        </table>
+
+
+      </div>
+
 
 
     </div>
 
-
-
   </div>
-</div>
 
 
-<script type="text/javascript">
-$(document).ready( function () {
-  $('#agentesTable').DataTable({
-    responsive: true
+  <script type="text/javascript">
+  $(document).ready( function () {
+    $('#agentesTable, #cargoTable, #regionalsTable, #anoMesTable, #segmentoTable').DataTable({
+      'responsive': true,
+      'paging': false,
+      'info': false,
+      'searching': false,
+      'scrollY': '45vh',
+      'scrollCollapse': true,
+      "ordering": false,
+      "columns": [
+        { "width": "5%" },
+        null
+      ],
+      "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [ 0 ] }
+      ],
+      // "columnDefs": [
+      //   { "max-width": "1%", "targets": 0 }
+      // ],
+      "language": {
+        "sEmptyTable": "Nenhum registro encontrado",
+        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sInfoThousands": ".",
+        "sLengthMenu": "_MENU_ resultados por página",
+        "sLoadingRecords": "Carregando...",
+        "sProcessing": "Processando...",
+        "sZeroRecords": "Nenhum registro encontrado",
+        "sSearch": "Pesquisar",
+        "oPaginate": {
+          "sNext": "Próximo",
+          "sPrevious": "Anterior",
+          "sFirst": "Primeiro",
+          "sLast": "Último"
+        },
+        "oAria": {
+          "sSortAscending": ": Ordenar colunas de forma ascendente",
+          "sSortDescending": ": Ordenar colunas de forma descendente"
+        }
+      }
+
+
+    });
+
   });
-
-  $('#cargoTable').DataTable({
-    responsive: true
-  });
-
-  $('#regionalsTable').DataTable({
-    responsive: true
-  });
-
-} );
 </script>

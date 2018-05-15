@@ -15,4 +15,6 @@
 //= require bootstrap
 //= require rails-ujs
 //= require turbolinks
+//= require dataTables/jquery.dataTables
+//= require dataTables/extras/dataTables.responsive
 //= require_tree .

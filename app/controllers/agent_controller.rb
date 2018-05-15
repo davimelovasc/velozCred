@@ -1,5 +1,8 @@
 class AgentController < ApplicationController
+  before_action :set_agent, only: [:edit, :update]
+  before_action :authenticate_agent!, only: [:edit, :update, :index]
   layout :resolve_layout
+
 
   def index
     @regionals = Regional.all
@@ -7,10 +10,17 @@ class AgentController < ApplicationController
   end
 
   def edit
-    @agent = Agent.first
   end
 
   def update
+    @agent.is_changed = true
+    if @agent.update(agent_params)
+      sign_in @agent, :bypass => true
+      redirect_to index_path
+    else
+      @agent.is_changed = false
+      render 'edit'
+    end
   end
 
   private
@@ -24,4 +34,11 @@ class AgentController < ApplicationController
     end
   end
 
+  def agent_params
+    params.require(:agent).permit(:agent_id, :password)
+  end
+
+  def set_agent
+    @agent = Agent.find(params[:id])
+  end
 end

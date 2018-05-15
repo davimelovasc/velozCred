@@ -1,5 +1,20 @@
 $( document ).ready(function() {
 
+  $("#editPasswordForm").submit(function( event ) {
+    var password = $("#password").val();
+    var password_confirmation = $("#password_confirmation").val();
+
+    if(password === password_confirmation) {
+      alert("Senha alterada com sucesso!");
+      return;
+    } else {
+      event.preventDefault();
+      alert("A confirmação das senhas falharam.")
+    }
+
+
+  });
+
   // alert("Para continuar, você precisa definir uma nova senha");
 
   var options = {
