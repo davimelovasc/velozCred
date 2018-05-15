@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get '/index', to: 'agent#index'
 
   devise_for :agents, at: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification' }
   #mount_devise_token_auth_for 'Agent', at: 'auth', skip: [:omniauth_callbacks]
@@ -11,15 +12,7 @@ Rails.application.routes.draw do
     get 'login', to: 'devise/sessions#new'
   end
 
-  get '/edit_password', to: 'agents#edit_password'
-
-
-  # devise_scope :agent do
-  #   get '/sign_in', to: 'agents#new'
-  # end
-  #
-  # devise_scope :agent do
-  #   get '/login', to: 'devise_token_auth/sessions#new'
-  # end
+  get '/change_password', to: 'agent#edit'
+  put '/change_password', to: 'agent#update'
 
 end

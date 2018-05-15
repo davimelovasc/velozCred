@@ -13,6 +13,7 @@ gem 'devise_token_auth'
 gem 'omniauth'
 gem 'jquery-rails'
 gem 'bootstrap', '4.1.1'
+gem 'jquery-datatables-rails', '~> 3.4.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
