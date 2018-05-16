@@ -57,6 +57,26 @@ div .dataTables_paginate a {
   font-size: .9rem;
 }
 
-table {
+#bt_buscar {
+    width: 10vw;
+    max-width: 180px;
+}
 
+.wrapper {
+  width: 15px !important;
+}
+
+@media (max-width: 770px) {
+  #bt_buscar {
+      width: 100px;
+      margin-top: 25px !important;
+  }
+}
+
+.btn-primary {
+  background-color: #0000ff;
+  border-color: #0000ff;
+}
+.btn-primary:hover {
+    background-color: #0000dd !important;
 }

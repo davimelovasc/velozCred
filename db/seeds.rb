@@ -18,3 +18,5 @@ regionals = Regional.create([
   {name: "Mato Grosso"},
   {name: "São Paulo"}
   ])
+
+  #posts = ["Agente", "Assistente", "Gerente", "Supervisor contas"]

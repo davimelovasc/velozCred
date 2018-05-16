@@ -16,6 +16,16 @@
               </tr>
             </thead>
             <tbody>
+              <% @posts.each do |r| %>
+              <tr>
+                <td class="wrapper">
+                    <input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>">
+                   </td>
+                <td> <label for="<%= r %>" > <%= r %>  </label></td>
+              </tr>
+
+              <% end %>
+
 
             </tbody>
           </table>
@@ -34,6 +44,12 @@
             </thead>
             <tbody>
 
+              <% @year_months.each do |r| %>
+              <tr>
+                <td class="wrapper"><input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
+                <td> <label for="<%= r %>" > <%= r %>  </label></td>
+              </tr>
+              <% end %>
             </tbody>
           </table>
         </div>
@@ -55,6 +71,13 @@
             </thead>
             <tbody>
 
+              <% @segments.each do |r| %>
+              <tr>
+                <td class="wrapper"><input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
+                <td> <label for="<%= r %>" > <%= r %>  </label></td>
+              </tr>
+              <% end %>
+
 
             </tbody>
           </table>
@@ -74,12 +97,12 @@
             </thead>
             <tbody>
               <tr>
-                <td><input name="regionals" type="checkbox" id="regionalsAll"></td>
+                <td class="wrapper"><input name="regionals" type="checkbox" id="regionalsAll"></td>
                 <td><label for="regionalsAll">Todos (as)</label></td>
               </tr>
               <% @regionals.each do |r| %>
               <tr>
-                <td><input name="regionals" type="checkbox" value="<%= r.name %>" id="<%= r.name %>"> </td>
+                <td class="wrapper"><input name="regionals" type="checkbox" value="<%= r.name %>" id="<%= r.name %>"> </td>
                 <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
               </tr>
 
@@ -94,7 +117,7 @@
 
     </div>
 
-    <div class="col-md-6" style="padding: 2vh 5vh;">
+    <div class="col-md-6 d-flex flex-column" style="padding: 2vh 5vh;">
 
       <h3>Agentes</h3>
 
@@ -107,18 +130,22 @@
         </thead>
         <tbody>
           <tr>
-            <td><input name="agents" type="checkbox" id="agentsAll"></td>
+            <td class="wrapper"><input name="agents" type="checkbox" id="agentsAll"></td>
             <td><label for="agentsAll">Todos (as)</td>
             </tr>
             <% @agents.each do |r| %>
             <tr>
-              <td><input name="agents" type="checkbox" id= "<%= r.name %>" ></td>
+              <td class="wrapper"><input name="agents" type="checkbox" id= "<%= r.name %>" ></td>
               <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
             </tr>
 
             <% end %>
           </tbody>
         </table>
+
+
+
+        <input type="submit" class="btn btn-primary mt-auto" value="Buscar" id="bt_buscar">
 
 
       </div>
@@ -132,24 +159,20 @@
 
   <script type="text/javascript">
   $(document).ready( function () {
-    $('#agentesTable, #cargoTable, #regionalsTable, #anoMesTable, #segmentoTable').DataTable({
+    $('#cargoTable, #regionalsTable, #anoMesTable, #segmentoTable').DataTable({
       'responsive': true,
       'paging': false,
       'info': false,
       'searching': false,
-      'scrollY': '45vh',
+      'scrollY': '29vh',
       'scrollCollapse': true,
       "ordering": false,
-      "columns": [
-        { "width": "5%" },
-        null
-      ],
       "aoColumnDefs": [
         { "bSortable": false, "aTargets": [ 0 ] }
       ],
-      // "columnDefs": [
-      //   { "max-width": "1%", "targets": 0 }
-      // ],
+      'columnDefs': [
+        {'max-width': '1%', 'targets': 0}
+      ],
       "language": {
         "sEmptyTable": "Nenhum registro encontrado",
         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -176,6 +199,52 @@
 
 
     });
+
+
+    $('#agentesTable').DataTable({
+      'responsive': true,
+      'paging': false,
+      'info': false,
+      'searching': true,
+      'scrollY': '60vh',
+      'scrollCollapse': true,
+      "ordering": false,
+      "columns": [
+        { "width": "5%" },
+        null
+      ],
+      "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [ 0 ] }
+      ],
+      "language": {
+        "sEmptyTable": "Nenhum registro encontrado",
+        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sInfoThousands": ".",
+        "sLengthMenu": "_MENU_ resultados por página",
+        "sLoadingRecords": "Carregando...",
+        "sProcessing": "Processando...",
+        "sZeroRecords": "Nenhum registro encontrado",
+        "search": "_INPUT_",
+        "searchPlaceholder": "Pesquisar...",
+        "oPaginate": {
+          "sNext": "Próximo",
+          "sPrevious": "Anterior",
+          "sFirst": "Primeiro",
+          "sLast": "Último"
+        },
+        "oAria": {
+          "sSortAscending": ": Ordenar colunas de forma ascendente",
+          "sSortDescending": ": Ordenar colunas de forma descendente"
+        }
+      }
+
+
+    });
+
+    $('#agentesTable_filter').addClass('float-md-left');
 
   });
 </script>

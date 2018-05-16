@@ -16,7 +16,9 @@
   </head>
 
   <body>
-    <%= render "layouts/top_bar" %>
+    <% if agent_signed_in? %>
+      <%= render "layouts/top_bar" %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
