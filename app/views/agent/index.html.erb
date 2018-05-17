@@ -18,9 +18,9 @@
             <tbody>
               <% @posts.each do |r| %>
               <tr>
-                <td class="wrapper">
-                    <input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>">
-                   </td>
+                <td class="wrapper_col">
+                  <input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>">
+                </td>
                 <td> <label for="<%= r %>" > <%= r %>  </label></td>
               </tr>
 
@@ -34,7 +34,7 @@
 
       <div class="row">
         <div class="col-md-12">
-          <h3>Ano/Mês</h3>
+          <h3>Mês/ano</h3>
           <table class="table table-sm display responsive no-wrap" width="100%" id="anoMesTable">
             <thead>
               <tr>
@@ -46,7 +46,7 @@
 
               <% @year_months.each do |r| %>
               <tr>
-                <td class="wrapper"><input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
+                <td class="wrapper_col"><input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
                 <td> <label for="<%= r %>" > <%= r %>  </label></td>
               </tr>
               <% end %>
@@ -73,7 +73,7 @@
 
               <% @segments.each do |r| %>
               <tr>
-                <td class="wrapper"><input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
+                <td class="wrapper_col"><input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
                 <td> <label for="<%= r %>" > <%= r %>  </label></td>
               </tr>
               <% end %>
@@ -97,12 +97,12 @@
             </thead>
             <tbody>
               <tr>
-                <td class="wrapper"><input name="regionals" type="checkbox" id="regionalsAll"></td>
+                <td class="wrapper_col"><input name="regionals" type="checkbox" id="regionalsAll"></td>
                 <td><label for="regionalsAll">Todos (as)</label></td>
               </tr>
               <% @regionals.each do |r| %>
               <tr>
-                <td class="wrapper"><input name="regionals" type="checkbox" value="<%= r.name %>" id="<%= r.name %>"> </td>
+                <td class="wrapper_col"><input name="regionals" type="checkbox" value="<%= r.name %>" id="<%= r.name %>"> </td>
                 <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
               </tr>
 
@@ -130,12 +130,12 @@
         </thead>
         <tbody>
           <tr>
-            <td class="wrapper"><input name="agents" type="checkbox" id="agentsAll"></td>
+            <td class="wrapper_col"><input name="agents" type="checkbox" id="agentsAll"></td>
             <td><label for="agentsAll">Todos (as)</td>
             </tr>
             <% @agents.each do |r| %>
             <tr>
-              <td class="wrapper"><input name="agents" type="checkbox" id= "<%= r.name %>" ></td>
+              <td class="wrapper_col"><input name="agents" type="checkbox" id= "<%= r.name %>" ></td>
               <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
             </tr>
 
@@ -144,8 +144,11 @@
         </table>
 
 
+        <div class="mt-auto ml-auto mr-auto">
+          <input type="submit" class="btn btn-primary" value="Produção diaria" id="bt_diaria">
+          <input type="submit" class="btn btn-primary" value="Produção total" id="bt_total">
+        </div>
 
-        <input type="submit" class="btn btn-primary mt-auto" value="Buscar" id="bt_buscar">
 
 
       </div>

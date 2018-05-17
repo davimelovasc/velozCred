@@ -8,15 +8,16 @@
 
 regionals = Regional.create([
   {name: "Fortaleza"},
-  {name: "Norte Ceara"},
+  {name: "Norte Ceará"},
   {name: "Maranhão"},
   {name: "Parelhas"},
   {name: "Pau dos Ferros"},
-  {name: "Sul Ceara"},
+  {name: "Sul Ceará"},
   {name: "Matriz"},
-  {name: "Piaui"},
+  {name: "Piauí"},
   {name: "Mato Grosso"},
   {name: "São Paulo"}
   ])
 
-  #posts = ["Agente", "Assistente", "Gerente", "Supervisor contas"]
+
+#posts = ["Agente", "Assistente", "Gerente", "Supervisor contas"]

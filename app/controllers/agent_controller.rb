@@ -7,13 +7,12 @@ class AgentController < ApplicationController
   def index
     @regionals = Regional.all
     @agents = Agent.all
-    @posts = ["Agente", "Assistente", "Gerente", "Supervisor contas", "Cargo 03", "Cargo 05", "Cargo teste"]
     #@posts = Agent.all.posts
 
     #Temp
     @year_months = ["12/2017", "01/2018", "02/2018", "03/2018", "04/2018", "05/20108"]
     @segments = ["Emprestimo bancário", "Segmento 02", "Segmento 03", "Segmento 04", "Segmento 05"]
-
+    @posts = ["Agente", "Assistente", "Gerente", "Supervisor contas", "Cargo 03", "Cargo 05", "Cargo teste"]
   end
 
   def edit

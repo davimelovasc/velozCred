@@ -57,17 +57,21 @@ div .dataTables_paginate a {
   font-size: .9rem;
 }
 
-#bt_buscar {
+.wrapper_col {
+  width: 15px !important;
+}
+
+#bt_total {
     width: 10vw;
     max-width: 180px;
 }
 
-.wrapper {
-  width: 15px !important;
+#bt_diaria {
+  margin-right: 10px;
 }
 
 @media (max-width: 770px) {
-  #bt_buscar {
+  #bt_total {
       width: 100px;
       margin-top: 25px !important;
   }
