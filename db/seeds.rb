@@ -19,5 +19,7 @@ regionals = Regional.create([
   {name: "São Paulo"}
   ])
 
+  #a = Agent.new(name: "Julio Costa", email: "juliocosta@gmail.com", password: "12345678", key_j: "A12345678", cpf: "04443276578", role: "Diretor", uf: "CE", cost_help: false);
+  #a.save
 
 #posts = ["Agente", "Assistente", "Gerente", "Supervisor contas"]

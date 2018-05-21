@@ -1,5 +1,6 @@
 class AgentController < ApplicationController
   before_action :set_agent, only: [:edit, :update]
+  before_action :require_same_agent, only: [:edit, :update]
   before_action :authenticate_agent!, only: [:edit, :update, :index]
   layout :resolve_layout
 
@@ -12,7 +13,7 @@ class AgentController < ApplicationController
     #Temp
     @year_months = ["12/2017", "01/2018", "02/2018", "03/2018", "04/2018", "05/20108"]
     @segments = ["Emprestimo bancário", "Segmento 02", "Segmento 03", "Segmento 04", "Segmento 05"]
-    @posts = ["Agente", "Assistente", "Gerente", "Supervisor contas", "Cargo 03", "Cargo 05", "Cargo teste"]
+    @posts = ["Agente", "Assistente", "Gerente"]
   end
 
   def edit
@@ -26,6 +27,20 @@ class AgentController < ApplicationController
     else
       @agent.is_changed = false
       render 'edit'
+    end
+  end
+
+  def search
+    if params[:commit] == 'Produção Diaria'
+
+
+
+
+    elsif params[:commit] == 'Produção Total'
+
+
+
+
     end
   end
 
@@ -47,4 +62,11 @@ class AgentController < ApplicationController
   def set_agent
     @agent = Agent.find(params[:id])
   end
+
+  def require_same_agent
+    if current_agent != @agent
+      redirect_to index_path
+    end
+  end
+
 end

@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   get '/change_password/:id', to: 'agent#edit', as: 'change_password'
   put '/change_password/:id', to: 'agent#update'
 
+  post '/search', to: 'agent#search'
+
 end

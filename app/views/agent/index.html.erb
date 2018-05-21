@@ -1,38 +1,12 @@
 <!-- form_for -->
+<%= form_tag("/search", method: "post", id:"search") do %>
 
 <div class="container-fluid">
   <div class="row">
 
     <div class="col-md-3" style="padding: 2vh 5vh;">
 
-      <div class="row">
-        <div class="col-md-12">
-          <h3>Cargo</h3>
-          <table class="table table-sm display responsive no-wrap" width="100%" id="cargoTable">
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @posts.each do |r| %>
-              <tr>
-                <td class="wrapper_col">
-                  <input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>">
-                </td>
-                <td> <label for="<%= r %>" > <%= r %>  </label></td>
-              </tr>
-
-              <% end %>
-
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="row">
+      <div class="row h-50">
         <div class="col-md-12">
           <h3>Mês/ano</h3>
           <table class="table table-sm display responsive no-wrap" width="100%" id="anoMesTable">
@@ -46,7 +20,7 @@
 
               <% @year_months.each do |r| %>
               <tr>
-                <td class="wrapper_col"><input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
+                <td class="wrapper_col"><input name="year_months[]" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
                 <td> <label for="<%= r %>" > <%= r %>  </label></td>
               </tr>
               <% end %>
@@ -55,11 +29,38 @@
         </div>
       </div>
 
+<!--    SO SE FOR GERENTE     -->
+      <div class="row h-50">
+        <div class="col-md-12">
+          <h3>Cargo</h3>
+          <table class="table table-sm display responsive no-wrap" width="100%" id="cargoTable">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @posts.each do |r| %>
+              <tr>
+                <td class="wrapper_col">
+                  <input name="roles[]" type="checkbox" value="<%= r %>" id="<%= r %>">
+                </td>
+                <td> <label for="<%= r %>" > <%= r %>  </label></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
     </div>
 
     <div class="col-md-3" style="padding: 2vh 5vh;">
 
-      <div class="row">
+      <div class="row h-50">
         <div class="col-md-12">
           <h3>Segmentos</h3>
           <table class="table table-sm display responsive no-wrap" width="100%" id="segmentoTable">
@@ -72,8 +73,8 @@
             <tbody>
 
               <% @segments.each do |r| %>
-              <tr>
-                <td class="wrapper_col"><input name="posts" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
+              <tr>                                                                      <!--r.id -->
+                <td class="wrapper_col"><input name="segments[]" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
                 <td> <label for="<%= r %>" > <%= r %>  </label></td>
               </tr>
               <% end %>
@@ -84,7 +85,10 @@
         </div>
       </div>
 
-      <div class="row">
+
+
+<!--    SO SE FOR GERENTE     -->
+      <div class="row h-50">
         <div class="col-md-12">
           <h3>Regionais</h3>
 
@@ -97,23 +101,21 @@
             </thead>
             <tbody>
               <tr>
-                <td class="wrapper_col"><input name="regionals" type="checkbox" id="regionalsAll"></td>
+                <td class="wrapper_col"><input name="regionals[]" type="checkbox" id="regionalsAll" value="*"></td>
                 <td><label for="regionalsAll">Todos (as)</label></td>
               </tr>
               <% @regionals.each do |r| %>
               <tr>
-                <td class="wrapper_col"><input name="regionals" type="checkbox" value="<%= r.name %>" id="<%= r.name %>"> </td>
+                <td class="wrapper_col"><input name="regionals[]" type="checkbox" value="<%= r.name %>" id="<%= r.name %>"> </td>
                 <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
               </tr>
-
               <% end %>
-
             </tbody>
           </table>
-
-
         </div>
       </div>
+
+
 
     </div>
 
@@ -130,12 +132,12 @@
         </thead>
         <tbody>
           <tr>
-            <td class="wrapper_col"><input name="agents" type="checkbox" id="agentsAll"></td>
+            <td class="wrapper_col"><input name="agents[]" type="checkbox" id="agentsAll" value="*"></td>
             <td><label for="agentsAll">Todos (as)</td>
             </tr>
             <% @agents.each do |r| %>
             <tr>
-              <td class="wrapper_col"><input name="agents" type="checkbox" id= "<%= r.name %>" ></td>
+              <td class="wrapper_col"><input name="agents[]" type="checkbox" id="<%= r.name %>" value="<%= r.id %>" ></td>
               <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
             </tr>
 
@@ -145,8 +147,8 @@
 
 
         <div class="mt-auto ml-auto mr-auto">
-          <input type="submit" class="btn btn-primary" value="Produção diaria" id="bt_diaria">
-          <input type="submit" class="btn btn-primary" value="Produção total" id="bt_total">
+          <%= submit_tag "Produção Diaria", class: "btn btn-primary", id: "bt_diaria" %>
+          <%= submit_tag "Produção Total", class: "btn btn-primary", id: "bt_total" %>
         </div>
 
 
@@ -159,9 +161,17 @@
 
   </div>
 
+  <% end %>
+
 
   <script type="text/javascript">
   $(document).ready( function () {
+
+    $('input[type="checkbox"]').prop('checked', false);
+
+
+
+
     $('#cargoTable, #regionalsTable, #anoMesTable, #segmentoTable').DataTable({
       'responsive': true,
       'paging': false,
@@ -202,7 +212,6 @@
 
 
     });
-
 
     $('#agentesTable').DataTable({
       'responsive': true,
