@@ -1,7 +1,8 @@
 class AgentController < ApplicationController
   before_action :set_agent, only: [:edit, :update]
   before_action :require_same_agent, only: [:edit, :update]
-  before_action :authenticate_agent!, only: [:edit, :update, :index]
+  before_action :authenticate_agent!, only: [:edit, :update, :index, :update_db]
+  before_action :require_director, only: [:update_db]
   layout :resolve_layout
 
 
@@ -44,6 +45,9 @@ class AgentController < ApplicationController
     end
   end
 
+  def update_db
+  end
+
   private
 
   def resolve_layout
@@ -65,6 +69,13 @@ class AgentController < ApplicationController
 
   def require_same_agent
     if current_agent != @agent
+      redirect_to index_path
+    end
+  end
+
+  def require_director
+    if current_agent.role == "Diretor" || current_agent.role == "Admin"
+    else
       redirect_to index_path
     end
   end

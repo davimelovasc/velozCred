@@ -9,12 +9,15 @@ Rails.application.routes.draw do
     get 'login', to: 'devise/sessions#new'
   end
 
-  get '/index', to: 'agent#index'
   root  to: 'agent#index'
 
+  get '/index', to: 'agent#index'
+  post '/search', to: 'agent#search'
+  
   get '/change_password/:id', to: 'agent#edit', as: 'change_password'
   put '/change_password/:id', to: 'agent#update'
 
-  post '/search', to: 'agent#search'
+
+  get '/update_db', to: 'agent#update_db'
 
 end

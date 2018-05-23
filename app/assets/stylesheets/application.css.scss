@@ -26,6 +26,10 @@ label {
   display: block;
 }
 
+a {
+  color: #0000ff;
+}
+
 header {
   width: 100%;
   height: 50px;
@@ -33,28 +37,17 @@ header {
 
 header a {
   display: inline-block;
-  float: right;
   padding: 10px;
-  margin-right: 3%;
   z-index: 99;
+}
+
+header a.floater {
+  float: right;
 }
 
 h3 {
   text-align: center;
   padding: 15px;
-}
-
-div .dataTables_length label, div .dataTables_length select {
-  display: none;
-}
-
-div .dataTables_wrapper .dataTables_paginate {
-  float: none;
-  text-align: left;
-}
-
-div .dataTables_paginate a {
-  font-size: .9rem;
 }
 
 .wrapper_col {
@@ -66,26 +59,23 @@ td {
   border: none;
 }
 
-#bt_total {
-  width: 10vw;
-  max-width: 180px;
-}
 
 #bt_diaria {
   margin-right: 10px;
 }
 
-@media (max-width: 770px) {
+@media (max-width: 380px) {
   #bt_total {
-    width: 100px;
-    margin-top: 25px !important;
+    margin-top: 5px;
   }
 }
 
+/*      BOOTSTRAP OVERRIDE      */
 .btn-primary {
   background-color: #0000ff;
   border-color: #0000ff;
 }
 .btn-primary:hover {
   background-color: #0000dd !important;
+  border-color: #0000dd !important;
 }
