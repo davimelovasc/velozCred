@@ -1,9 +1,8 @@
 <header>
 
-<a href="#" style=""><%= current_agent.name %></a>
-
   <%= link_to "Sair", destroy_agent_session_path, method: :delete, class: "floater",style: "margin-right: 2%;" %>
   <% if current_agent.role == "Admin" || current_agent.role == "Diretor" %>
     <%= link_to "Atualizar Banco de Dados", update_db_path, class: "floater" %>
   <% end %>
+  <%= link_to "Redefinir Senha", change_password_path(current_agent.id), class: "floater" %>
 </header>

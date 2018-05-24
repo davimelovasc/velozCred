@@ -40,7 +40,7 @@ class DeviseTokenAuthCreateAgents < ActiveRecord::Migration[5.1]
       t.string :key_j,              null: false
       t.string :email,              null: false
       t.string :cpf,                null: false # limit: 11
-      t.string :role,              null: false
+      t.string :role,               null: false
       t.string :uf,                 null: false # limit: 2
       t.string :ctps_cda
       t.float  :commission_percent

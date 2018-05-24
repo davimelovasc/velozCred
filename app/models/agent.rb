@@ -8,7 +8,7 @@ class Agent < ActiveRecord::Base
   has_one :regional
   belongs_to :regional, optional: true
   has_many :total_productions
-  has_many :daily_productions
+  has_one :daily_production
 
 
   validates :name, presence: true

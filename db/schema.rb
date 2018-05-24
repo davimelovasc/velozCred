@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509104116) do
+ActiveRecord::Schema.define(version: 20180524125806) do
+
+  create_table "agent_auxes", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "key_j", null: false
+    t.string "role", null: false
+    t.string "uf", null: false
+    t.string "ctps_cda"
+    t.float "commission_percent"
+    t.string "prefix"
+    t.string "account"
+    t.string "account_type"
+    t.float "extra"
+    t.float "discount"
+    t.float "vr_comis_account"
+    t.date "activity_start"
+    t.boolean "cost_help"
+    t.text "obs"
+    t.integer "regional_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["regional_id"], name: "index_agent_auxes_on_regional_id"
+  end
 
   create_table "agents", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -113,6 +135,7 @@ ActiveRecord::Schema.define(version: 20180509104116) do
     t.string "company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cod_regional", default: 0, null: false
     t.index ["agent_id"], name: "index_regionals_on_agent_id"
   end
 

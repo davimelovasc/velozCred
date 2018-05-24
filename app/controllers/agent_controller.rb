@@ -8,7 +8,9 @@ class AgentController < ApplicationController
 
   def index
     @regionals = Regional.all
-    @agents = Agent.all
+    @agents = AgentAux.all
+
+    @agents = @agents.order(:name)
     #@posts = Agent.all.posts
 
     #Temp
@@ -75,6 +77,40 @@ class AgentController < ApplicationController
 
   def require_director
     if current_agent.role == "Diretor" || current_agent.role == "Admin"
+
+      database = Mdb.open("#{Rails.root.to_s}/Cadastro.accdb")
+      agents = database["Agentes"]
+
+      agents.each do |a|
+        agent = AgentAux.new( account: a[:Conta],
+          account_type: a[:TipoConta],
+          activity_start: a[:InícioAtividade],
+          commission_percent: a[:PercComissão],
+          cost_help: a[:AjudaCusto],
+          ctps_cda: a[:"CTPS/CDA"],
+          discount: a[:Descontos],
+          extra: a[:Acrescimos],
+          key_j: a[:ChaveJ],
+          name: a[:NOME],
+          obs: a[:Observação],
+          prefix: a[:Prefixo],
+          role: a[:CARGO],
+          uf: a[:UF],
+          vr_comis_account: a[:VrComissãoConta]
+        )
+
+        if agent.valid?
+          agent.save
+        end
+
+        sleep 0.1
+
+      end
+
+
+      redirect_to index_path
+
+
     else
       redirect_to index_path
     end
