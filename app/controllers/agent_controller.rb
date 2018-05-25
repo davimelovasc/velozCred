@@ -9,13 +9,14 @@ class AgentController < ApplicationController
   def index
     @regionals = Regional.all
     @agents = AgentAux.all
+    @segments = Segment.all
 
     @agents = @agents.order(:name)
     #@posts = Agent.all.posts
 
     #Temp
     @year_months = ["12/2017", "01/2018", "02/2018", "03/2018", "04/2018", "05/20108"]
-    @segments = ["Emprestimo bancário", "Segmento 02", "Segmento 03", "Segmento 04", "Segmento 05"]
+
     @posts = ["Agente", "Assistente", "Gerente"]
   end
 
@@ -103,9 +104,8 @@ class AgentController < ApplicationController
           agent.save
         end
 
-        sleep 0.1
-
       end
+
 
 
       redirect_to index_path

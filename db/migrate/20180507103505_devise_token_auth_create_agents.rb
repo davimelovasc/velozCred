@@ -53,7 +53,7 @@ class DeviseTokenAuthCreateAgents < ActiveRecord::Migration[5.1]
       t.date  :activity_start
       t.boolean :cost_help
       t.text :obs
-      t.references :regional, foreign_key: true, index: true
+      t.integer :regional_id, foreign_key: true
 
 
       ## Tokens

@@ -12,29 +12,28 @@
 
 ActiveRecord::Schema.define(version: 20180524125806) do
 
-  create_table "agent_auxes", force: :cascade do |t|
+  create_table "agent_auxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.string "key_j", null: false
     t.string "role", null: false
     t.string "uf", null: false
     t.string "ctps_cda"
-    t.float "commission_percent"
+    t.float "commission_percent", limit: 24
     t.string "prefix"
     t.string "account"
     t.string "account_type"
-    t.float "extra"
-    t.float "discount"
-    t.float "vr_comis_account"
+    t.float "extra", limit: 24
+    t.float "discount", limit: 24
+    t.float "vr_comis_account", limit: 24
     t.date "activity_start"
     t.boolean "cost_help"
     t.text "obs"
     t.integer "regional_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["regional_id"], name: "index_agent_auxes_on_regional_id"
   end
 
-  create_table "agents", force: :cascade do |t|
+  create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -48,13 +47,13 @@ ActiveRecord::Schema.define(version: 20180524125806) do
     t.string "role", null: false
     t.string "uf", null: false
     t.string "ctps_cda"
-    t.float "commission_percent"
+    t.float "commission_percent", limit: 24
     t.string "prefix"
     t.string "account"
     t.string "account_type"
-    t.float "extra"
-    t.float "discount"
-    t.float "vr_comis_account"
+    t.float "extra", limit: 24
+    t.float "discount", limit: 24
+    t.float "vr_comis_account", limit: 24
     t.date "activity_start"
     t.boolean "cost_help"
     t.text "obs"
@@ -64,43 +63,42 @@ ActiveRecord::Schema.define(version: 20180524125806) do
     t.datetime "updated_at", null: false
     t.boolean "is_changed", default: false
     t.index ["email"], name: "index_agents_on_email", unique: true
-    t.index ["regional_id"], name: "index_agents_on_regional_id"
     t.index ["reset_password_token"], name: "index_agents_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_agents_on_uid_and_provider", unique: true
   end
 
-  create_table "daily_productions", force: :cascade do |t|
+  create_table "daily_productions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "agent_id"
-    t.float "goal"
-    t.float "value"
-    t.float "miss"
-    t.float "miss_percent"
-    t.float "goal_du"
-    t.float "miss_du"
-    t.float "du_percent"
-    t.float "d_one"
-    t.float "d_two"
-    t.float "d_three"
-    t.float "d_four"
-    t.float "d_five"
-    t.float "d_six"
-    t.float "d_seven"
-    t.float "d_eight"
-    t.float "d_nine"
-    t.float "d_ten"
-    t.float "d_eleven"
-    t.float "d_twelve"
-    t.float "d_thirteen"
-    t.float "d_fourteen"
-    t.float "d_fiveteen"
-    t.float "d_sixteen"
-    t.float "d_seventeen"
-    t.float "d_eighteen"
-    t.float "d_nineteen"
-    t.float "d_twenty"
-    t.float "d_twentyone"
-    t.float "d_twentytwo"
-    t.float "d_twentythree"
+    t.float "goal", limit: 24
+    t.float "value", limit: 24
+    t.float "miss", limit: 24
+    t.float "miss_percent", limit: 24
+    t.float "goal_du", limit: 24
+    t.float "miss_du", limit: 24
+    t.float "du_percent", limit: 24
+    t.float "d_one", limit: 24
+    t.float "d_two", limit: 24
+    t.float "d_three", limit: 24
+    t.float "d_four", limit: 24
+    t.float "d_five", limit: 24
+    t.float "d_six", limit: 24
+    t.float "d_seven", limit: 24
+    t.float "d_eight", limit: 24
+    t.float "d_nine", limit: 24
+    t.float "d_ten", limit: 24
+    t.float "d_eleven", limit: 24
+    t.float "d_twelve", limit: 24
+    t.float "d_thirteen", limit: 24
+    t.float "d_fourteen", limit: 24
+    t.float "d_fiveteen", limit: 24
+    t.float "d_sixteen", limit: 24
+    t.float "d_seventeen", limit: 24
+    t.float "d_eighteen", limit: 24
+    t.float "d_nineteen", limit: 24
+    t.float "d_twenty", limit: 24
+    t.float "d_twentyone", limit: 24
+    t.float "d_twentytwo", limit: 24
+    t.float "d_twentythree", limit: 24
     t.integer "n_one"
     t.integer "n_two"
     t.integer "n_three"
@@ -126,39 +124,35 @@ ActiveRecord::Schema.define(version: 20180524125806) do
     t.integer "n_twentythree"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_daily_productions_on_agent_id"
   end
 
-  create_table "regionals", force: :cascade do |t|
+  create_table "regionals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "agent_id"
     t.string "name", null: false
     t.string "company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cod_regional", default: 0, null: false
-    t.index ["agent_id"], name: "index_regionals_on_agent_id"
   end
 
-  create_table "segments", force: :cascade do |t|
+  create_table "segments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "ord_segment"
     t.string "segment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "total_productions", force: :cascade do |t|
+  create_table "total_productions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "segment_id"
     t.integer "agent_id"
     t.date "year_month", null: false
-    t.float "goal"
-    t.float "production_value"
-    t.float "goal_percent"
-    t.float "remuneration"
-    t.float "remunaration_percent"
+    t.float "goal", limit: 24
+    t.float "production_value", limit: 24
+    t.float "goal_percent", limit: 24
+    t.float "remuneration", limit: 24
+    t.float "remunaration_percent", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_total_productions_on_agent_id"
-    t.index ["segment_id"], name: "index_total_productions_on_segment_id"
   end
 
 end

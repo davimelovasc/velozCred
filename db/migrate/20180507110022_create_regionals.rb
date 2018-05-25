@@ -1,7 +1,7 @@
 class CreateRegionals < ActiveRecord::Migration[5.1]
   def change
     create_table :regionals do |t|
-      t.references :agent, foreign_key: true, index: true
+      t.integer :agent_id, foreign_key: true
       t.string :name,      null: false
       t.string :company
 
