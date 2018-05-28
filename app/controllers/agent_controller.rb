@@ -7,17 +7,13 @@ class AgentController < ApplicationController
 
 
   def index
-    @regionals = Regional.all
     @agents = AgentAux.all
-    @segments = Segment.all
-
     @agents = @agents.order(:name)
-    #@posts = Agent.all.posts
+    @regionals = Regional.all
+    @segments = Segment.all
+    @year_months = TotalProduction.select(:year_month).distinct
+    @roles = ["Agente", "Assistente", "Gerente", "Supervisor"]
 
-    #Temp
-    @year_months = ["12/2017", "01/2018", "02/2018", "03/2018", "04/2018", "05/20108"]
-
-    @posts = ["Agente", "Assistente", "Gerente"]
   end
 
   def edit
@@ -79,11 +75,12 @@ class AgentController < ApplicationController
   def require_director
     if current_agent.role == "Diretor" || current_agent.role == "Admin"
 
+
       database = Mdb.open("#{Rails.root.to_s}/Cadastro.accdb")
       agents = database["Agentes"]
 
       agents.each do |a|
-        agent = AgentAux.new( account: a[:Conta],
+        @agent = AgentAux.new( account: a[:Conta],
           account_type: a[:TipoConta],
           activity_start: a[:InícioAtividade],
           commission_percent: a[:PercComissão],
@@ -100,20 +97,60 @@ class AgentController < ApplicationController
           vr_comis_account: a[:VrComissãoConta]
         )
 
-        if agent.valid?
+        if AgentAux.where(key_j: @agent.key_j) || Agent.where(key_j: @agent.key_j)
+          puts 'Agente existe'
+        elsif agent.valid?
           agent.save
         end
 
       end
 
 
+      database2 = Mdb.open("#{Rails.root.to_s}/Producao.accdb")
+      segments = database2["Segmentos"]
 
-      redirect_to index_path
+      segments.each do |s|
+        @segment = Segment.new( segment: s[:Segmentos], ord_segment: s[:OrdSegmento] )
+
+        if Segment.where(segment: @segment.segment)
+          puts 'Segmento existe'
+        elsif segment.valid?
+          segment.save
+        end
+
+      end
 
 
-    else
-      redirect_to index_path
+      total_productions = database2["ProduçãoTotal"]
+
+      # total_productions.each do |t|
+      #   @total_production = TotalProduction.new( production_value: t[:VrProdução],
+      #     remunaration_percent: t[:PercRemuneração],
+      #     remuneration: t[:Remuneração],
+      #     year_month: t[:AnoMes])
+      #
+      #     a = Agent.where(key_j: t[:"Chave J"])
+      #
+      #     if a != nil
+      #       @total_production.agent = a
+      #     else
+      #       a = AgentAux.where(key_j: t[:"Chave J"]) != null
+      #       @total_production << a
+      #     end
+      #
+      #     seg = Segment.where(segment: t[:Segmento])
+      #     @total_production << seg
+      #
+      #
+      #
+      #     redirect_to index_path
+      #
+      #   end
+      #
+      # else
+      #   redirect_to index_path
+      # end
     end
-  end
 
+  end
 end

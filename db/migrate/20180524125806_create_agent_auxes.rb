@@ -3,9 +3,9 @@ class CreateAgentAuxes < ActiveRecord::Migration[5.1]
     create_table :agent_auxes do |t|
 
       t.string :name,               null: false
-      t.string :key_j,              null: false
+      t.string :key_j,              null: false, unique: true
       t.string :role,               null: false
-      t.string :uf,                 null: false # limit: 2
+      t.string :uf
       t.string :ctps_cda
       t.float  :commission_percent
       t.string :prefix            #limit: 6
@@ -17,7 +17,8 @@ class CreateAgentAuxes < ActiveRecord::Migration[5.1]
       t.date  :activity_start
       t.boolean :cost_help
       t.text :obs
-      t.integer :regional_id, foreign_key: true
+      t.references :regional, index: true, foreign_key: { to_table: :agent_auxes }
+      t.references :agent, index: true, foreign_key: { to_table: :agent_auxes }
 
 
       t.timestamps

@@ -76,6 +76,12 @@ td {
   border-color: #0000ff;
 }
 .btn-primary:hover {
-  background-color: #0000dd !important;
-  border-color: #0000dd !important;
+  background-color: #0000cc !important;
+  border-color: #0000cc !important;
+  transition: background-color 1s;
+}
+.btn-primary:active, .btn-primary:focus  {
+  background-color: #0000aa !important;
+  border-color: #0000aa !important;
+  transition: background-color .5s;
 }

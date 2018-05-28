@@ -1,7 +1,8 @@
 class CreateDailyProductions < ActiveRecord::Migration[5.1]
   def change
     create_table :daily_productions do |t|
-      t.integer :agent_id, foreign_key: true
+      t.references :agent_aux, index: true, foreign_key: { to_table: :daily_productions }
+
       t.float :goal
       t.float :value
       t.float :miss

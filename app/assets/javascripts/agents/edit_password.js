@@ -4,13 +4,19 @@ $( document ).ready(function() {
     var password = $("#password").val();
     var password_confirmation = $("#password_confirmation").val();
 
+    if(password.length < 7) {
+      alert("Sua senha deve conter pelo menos 8 caracteres.")
+      return false;
+    }
+
+
     if(password === password_confirmation) {
       alert("Senha alterada com sucesso!");
-      return;
-    } else {
-      event.preventDefault();
-      alert("A confirmação das senhas falharam.")
+      return true;
     }
+
+    alert("A confirmação das senhas falharam.");
+    return false;
 
 
   });

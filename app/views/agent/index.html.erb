@@ -6,7 +6,7 @@
 
     <div class="col-lg-3 col-md-12" style="padding: 2vh 5vh;">
 
-      <div class="row mh-50">
+      <div class="row h-50">
         <div class="col-md-12">
           <h3>Mês/ano</h3>
           <table class="table table-sm display responsive no-wrap" width="100%" id="anoMesTable">
@@ -29,8 +29,10 @@
         </div>
       </div>
 
+
       <!--    SO SE FOR GERENTE     -->
-      <div class="row mh-50">
+      <% if current_agent.role == "Gerente" %>
+      <div class="row h-50 mt-4">
         <div class="col-md-12">
           <h3>Cargo</h3>
           <table class="table table-sm display responsive no-wrap" width="100%" id="cargoTable">
@@ -41,7 +43,7 @@
               </tr>
             </thead>
             <tbody>
-              <% @posts.each do |r| %>
+              <% @roles.each do |r| %>
               <tr>
                 <td class="wrapper_col">
                   <input name="roles[]" type="checkbox" value="<%= r %>" id="<%= r %>">
@@ -53,6 +55,7 @@
           </table>
         </div>
       </div>
+      <% end %>
 
 
 
@@ -60,7 +63,7 @@
 
     <div class="col-lg-3 col-md-12" style="padding: 2vh 5vh;">
 
-      <div class="row mh-50">
+      <div class="row h-50">
         <div class="col-md-12">
           <h3>Segmentos</h3>
           <table class="table table-sm display responsive no-wrap" width="100%" id="segmentoTable">
@@ -74,8 +77,8 @@
 
               <% @segments.each do |r| %>
               <tr>                                                                      <!--r.id -->
-                <td class="wrapper_col"><input name="segments[]" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
-                <td> <label for="<%= r %>" > <%= r %>  </label></td>
+                <td class="wrapper_col"><input name="segments[]" type="checkbox" value="<%= r.id %>" id="<%= r.segment %>"> </td>
+                <td> <label for="<%= r.segment %>" > <%= r.segment %>  </label></td>
               </tr>
               <% end %>
 
@@ -88,7 +91,8 @@
 
 
       <!--    SO SE FOR GERENTE     -->
-      <div class="row mh-50">
+      <% if current_agent.role == "Gerente" %>
+      <div class="row h-50 mt-4">
         <div class="col-md-12">
           <h3>Regionais</h3>
 
@@ -114,13 +118,12 @@
           </table>
         </div>
       </div>
-
+      <% end %>
 
 
     </div>
 
-    <div class="col-lg-6 col-md-12 d-flex flex-column" style="padding: 2vh 5vh;">
-
+    <div class="col-lg-6 col-md-12 d-flex flex-column" style="padding: 2vh 5vh; height: 90vh;">
       <h3>Agentes</h3>
 
       <table class="table table-sm display responsive no-wrap" width="100%" id="agentesTable">
@@ -146,6 +149,7 @@
         </table>
 
 
+
         <div class="row mt-auto ml-auto mr-auto">
           <div class="col-12 mt-3">
             <%= submit_tag "Produção Diaria", class: "btn btn-primary", id: "bt_diaria" %>
@@ -153,7 +157,6 @@
           </div>
 
         </div>
-
 
 
       </div>

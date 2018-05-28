@@ -37,23 +37,24 @@ class DeviseTokenAuthCreateAgents < ActiveRecord::Migration[5.1]
 
       ## User Info
       t.string :name,               null: false
-      t.string :key_j,              null: false
+      t.string :key_j,              null: false, unique: true
       t.string :email,              null: false
       t.string :cpf,                null: false # limit: 11
       t.string :role,               null: false
-      t.string :uf,                 null: false # limit: 2
-      t.string :ctps_cda
-      t.float  :commission_percent
-      t.string :prefix            #limit: 6
-      t.string :account
-      t.string :account_type
-      t.float :extra
-      t.float :discount
-      t.float :vr_comis_account
-      t.date  :activity_start
-      t.boolean :cost_help
-      t.text :obs
-      t.integer :regional_id, foreign_key: true
+      #t.string :uf,                 null: false # limit: 2
+      #t.string :ctps_cda
+      #t.float  :commission_percent
+      #t.string :prefix            #limit: 6
+      #t.string :account
+      #t.string :account_type
+      #t.float :extra
+      #t.float :discount
+      #t.float :vr_comis_account
+      #t.date  :activity_start
+      #t.boolean :cost_help
+      #t.text :obs
+      t.boolean :is_changed, default: false
+      #t.references :regional, index: true, foreign_key: { to_table: :agents }
 
 
       ## Tokens
@@ -61,7 +62,6 @@ class DeviseTokenAuthCreateAgents < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-
     add_index :agents, :email,                unique: true
     add_index :agents, [:uid, :provider],     unique: true
     add_index :agents, :reset_password_token, unique: true

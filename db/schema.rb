@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180524125806) do
+ActiveRecord::Schema.define(version: 20180526210056) do
 
   create_table "agent_auxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.string "key_j", null: false
     t.string "role", null: false
-    t.string "uf", null: false
+    t.string "uf"
     t.string "ctps_cda"
     t.float "commission_percent", limit: 24
     t.string "prefix"
@@ -28,9 +28,12 @@ ActiveRecord::Schema.define(version: 20180524125806) do
     t.date "activity_start"
     t.boolean "cost_help"
     t.text "obs"
-    t.integer "regional_id"
+    t.bigint "regional_id"
+    t.bigint "agent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_agent_auxes_on_agent_id"
+    t.index ["regional_id"], name: "index_agent_auxes_on_regional_id"
   end
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -45,30 +48,17 @@ ActiveRecord::Schema.define(version: 20180524125806) do
     t.string "email", null: false
     t.string "cpf", null: false
     t.string "role", null: false
-    t.string "uf", null: false
-    t.string "ctps_cda"
-    t.float "commission_percent", limit: 24
-    t.string "prefix"
-    t.string "account"
-    t.string "account_type"
-    t.float "extra", limit: 24
-    t.float "discount", limit: 24
-    t.float "vr_comis_account", limit: 24
-    t.date "activity_start"
-    t.boolean "cost_help"
-    t.text "obs"
-    t.integer "regional_id"
+    t.boolean "is_changed", default: false
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_changed", default: false
     t.index ["email"], name: "index_agents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_agents_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_agents_on_uid_and_provider", unique: true
   end
 
   create_table "daily_productions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "agent_id"
+    t.bigint "agent_aux_id"
     t.float "goal", limit: 24
     t.float "value", limit: 24
     t.float "miss", limit: 24
@@ -124,28 +114,30 @@ ActiveRecord::Schema.define(version: 20180524125806) do
     t.integer "n_twentythree"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["agent_aux_id"], name: "index_daily_productions_on_agent_aux_id"
   end
 
   create_table "regionals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "agent_id"
+    t.bigint "agent_aux_id"
     t.string "name", null: false
+    t.integer "cod_regional", default: 0, null: false
     t.string "company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "cod_regional", default: 0, null: false
+    t.index ["agent_aux_id"], name: "index_regionals_on_agent_aux_id"
   end
 
   create_table "segments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "ord_segment"
     t.string "segment", null: false
+    t.integer "ord_segment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "total_productions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "segment_id"
-    t.integer "agent_id"
-    t.date "year_month", null: false
+    t.bigint "segment_id"
+    t.bigint "year_month_id"
+    t.bigint "agent_aux_id"
     t.float "goal", limit: 24
     t.float "production_value", limit: 24
     t.float "goal_percent", limit: 24
@@ -153,6 +145,22 @@ ActiveRecord::Schema.define(version: 20180524125806) do
     t.float "remunaration_percent", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["agent_aux_id"], name: "index_total_productions_on_agent_aux_id"
+    t.index ["segment_id"], name: "index_total_productions_on_segment_id"
+    t.index ["year_month_id"], name: "index_total_productions_on_year_month_id"
   end
 
+  create_table "year_months", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "year_month"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "agent_auxes", "agent_auxes", column: "agent_id"
+  add_foreign_key "agent_auxes", "agent_auxes", column: "regional_id"
+  add_foreign_key "daily_productions", "daily_productions", column: "agent_aux_id"
+  add_foreign_key "regionals", "regionals", column: "agent_aux_id"
+  add_foreign_key "total_productions", "total_productions", column: "agent_aux_id"
+  add_foreign_key "total_productions", "total_productions", column: "segment_id"
+  add_foreign_key "total_productions", "total_productions", column: "year_month_id"
 end

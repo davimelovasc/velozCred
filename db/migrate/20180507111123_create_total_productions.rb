@@ -1,9 +1,10 @@
 class CreateTotalProductions < ActiveRecord::Migration[5.1]
   def change
     create_table :total_productions do |t|
-      t.integer :segment_id, foreign_key: true
-      t.integer :agent_id, foreign_key: true
-      t.date :year_month, null: false
+      t.references :segment, index: true, foreign_key: { to_table: :total_productions }
+      t.references :year_month, index: true, foreign_key: { to_table: :total_productions }
+      t.references :agent_aux, index: true, foreign_key: { to_table: :total_productions }
+
       t.float :goal
       t.float :production_value
       t.float :goal_percent
