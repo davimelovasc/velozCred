@@ -2,6 +2,9 @@ class CreateAgentAuxes < ActiveRecord::Migration[5.1]
   def change
     create_table :agent_auxes do |t|
 
+      #t.references :regional, foreign_key: true, type: :integer
+      #t.references :agent, foreign_key: true, type: :integer
+
       t.string :name,               null: false
       t.string :key_j,              null: false, unique: true
       t.string :role,               null: false
@@ -17,9 +20,6 @@ class CreateAgentAuxes < ActiveRecord::Migration[5.1]
       t.date  :activity_start
       t.boolean :cost_help
       t.text :obs
-      t.references :regional, index: true, foreign_key: { to_table: :agent_auxes }
-      t.references :agent, index: true, foreign_key: { to_table: :agent_auxes }
-
 
       t.timestamps
     end

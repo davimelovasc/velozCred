@@ -20,8 +20,8 @@
 
               <% @year_months.each do |r| %>
               <tr>
-                <td class="wrapper_col"><input name="year_months[]" type="checkbox" value="<%= r %>" id="<%= r %>"> </td>
-                <td> <label for="<%= r %>" > <%= r %>  </label></td>
+                <td class="wrapper_col"><input name="year_months[]" type="checkbox" value="<%= r.id %>" id="<%= r.year_month %>"> </td>
+                <td> <label for="<%= r.year_month %>" class="year_month" > <%= r.year_month %>  </label></td>
               </tr>
               <% end %>
             </tbody>
@@ -30,9 +30,9 @@
       </div>
 
 
-      <!--    SO SE FOR GERENTE     -->
-      <% if current_agent.role == "Gerente" %>
-      <div class="row h-50 mt-4">
+      <!--    SO SE FOR DIRETOR     -->
+      <% if current_agent.role == "Diretor" || current_agent.role == "Administrador" %>
+      <div class="row h-50 mt-2">
         <div class="col-md-12">
           <h3>Cargo</h3>
           <table class="table table-sm display responsive no-wrap" width="100%" id="cargoTable">
@@ -46,9 +46,9 @@
               <% @roles.each do |r| %>
               <tr>
                 <td class="wrapper_col">
-                  <input name="roles[]" type="checkbox" value="<%= r %>" id="<%= r %>">
+                  <input name="roles[]" type="checkbox" value="<%= r.role %>" id="<%= r.role %>">
                 </td>
-                <td> <label for="<%= r %>" > <%= r %>  </label></td>
+                <td> <label for="<%= r.role %>" > <%= r.role %>  </label></td>
               </tr>
               <% end %>
             </tbody>
@@ -90,9 +90,9 @@
 
 
 
-      <!--    SO SE FOR GERENTE     -->
-      <% if current_agent.role == "Gerente" %>
-      <div class="row h-50 mt-4">
+      <!--    SO SE FOR DIRETOR     -->
+      <% if current_agent.role == "Diretor" || current_agent.role == "Administrador" %>
+      <div class="row h-50 mt-2">
         <div class="col-md-12">
           <h3>Regionais</h3>
 
@@ -143,7 +143,6 @@
               <td class="wrapper_col"><input name="agents[]" type="checkbox" id="<%= r.name %>" value="<%= r.id %>" ></td>
               <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
             </tr>
-
             <% end %>
           </tbody>
         </table>

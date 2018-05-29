@@ -5,7 +5,7 @@ class Agent < ActiveRecord::Base
          :recoverable, authentication_keys: [:key_j]
   include DeviseTokenAuth::Concerns::User
 
-  has_one :agent_aux
+  has_one :agent_aux, dependent: :nullify
 
   validates :name, presence: true
   validates :key_j, presence: true, length: {is: 8}

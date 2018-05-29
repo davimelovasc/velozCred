@@ -1,7 +1,7 @@
 class CreateDailyProductions < ActiveRecord::Migration[5.1]
   def change
     create_table :daily_productions do |t|
-      t.references :agent_aux, index: true, foreign_key: { to_table: :daily_productions }
+      #t.references :agent_aux, foreign_key: true, type: :integer
 
       t.float :goal
       t.float :value
@@ -35,29 +35,29 @@ class CreateDailyProductions < ActiveRecord::Migration[5.1]
       t.float :d_twentytwo
       t.float :d_twentythree
 
-      t.integer :n_one
-      t.integer :n_two
-      t.integer :n_three
-      t.integer :n_four
-      t.integer :n_five
-      t.integer :n_six
-      t.integer :n_seven
-      t.integer :n_eight
-      t.integer :n_nine
-      t.integer :n_ten
-      t.integer :n_eleven
-      t.integer :n_twelve
-      t.integer :n_thirteen
-      t.integer :n_fourteen
-      t.integer :n_fiveteen
-      t.integer :n_sixteen
-      t.integer :n_seventeen
-      t.integer :n_eighteen
-      t.integer :n_nineteen
-      t.integer :n_twenty
-      t.integer :n_twentyone
-      t.integer :n_twentytwo
-      t.integer :n_twentythree
+      t.string :n_one
+      t.string :n_two
+      t.string :n_three
+      t.string :n_four
+      t.string :n_five
+      t.string :n_six
+      t.string :n_seven
+      t.string :n_eight
+      t.string :n_nine
+      t.string :n_ten
+      t.string :n_eleven
+      t.string :n_twelve
+      t.string :n_thirteen
+      t.string :n_fourteen
+      t.string :n_fiveteen
+      t.string :n_sixteen
+      t.string :n_seventeen
+      t.string :n_eighteen
+      t.string :n_nineteen
+      t.string :n_twenty
+      t.string :n_twentyone
+      t.string :n_twentytwo
+      t.string :n_twentythree
 
       t.timestamps
     end

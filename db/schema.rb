@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180526210056) do
+ActiveRecord::Schema.define(version: 20180529011343) do
 
   create_table "agent_auxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
@@ -28,10 +28,10 @@ ActiveRecord::Schema.define(version: 20180526210056) do
     t.date "activity_start"
     t.boolean "cost_help"
     t.text "obs"
-    t.bigint "regional_id"
-    t.bigint "agent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "regional_id"
+    t.bigint "agent_id"
     t.index ["agent_id"], name: "index_agent_auxes_on_agent_id"
     t.index ["regional_id"], name: "index_agent_auxes_on_regional_id"
   end
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 20180526210056) do
   end
 
   create_table "daily_productions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "agent_aux_id"
     t.float "goal", limit: 24
     t.float "value", limit: 24
     t.float "miss", limit: 24
@@ -89,41 +88,42 @@ ActiveRecord::Schema.define(version: 20180526210056) do
     t.float "d_twentyone", limit: 24
     t.float "d_twentytwo", limit: 24
     t.float "d_twentythree", limit: 24
-    t.integer "n_one"
-    t.integer "n_two"
-    t.integer "n_three"
-    t.integer "n_four"
-    t.integer "n_five"
-    t.integer "n_six"
-    t.integer "n_seven"
-    t.integer "n_eight"
-    t.integer "n_nine"
-    t.integer "n_ten"
-    t.integer "n_eleven"
-    t.integer "n_twelve"
-    t.integer "n_thirteen"
-    t.integer "n_fourteen"
-    t.integer "n_fiveteen"
-    t.integer "n_sixteen"
-    t.integer "n_seventeen"
-    t.integer "n_eighteen"
-    t.integer "n_nineteen"
-    t.integer "n_twenty"
-    t.integer "n_twentyone"
-    t.integer "n_twentytwo"
-    t.integer "n_twentythree"
+    t.string "n_one"
+    t.string "n_two"
+    t.string "n_three"
+    t.string "n_four"
+    t.string "n_five"
+    t.string "n_six"
+    t.string "n_seven"
+    t.string "n_eight"
+    t.string "n_nine"
+    t.string "n_ten"
+    t.string "n_eleven"
+    t.string "n_twelve"
+    t.string "n_thirteen"
+    t.string "n_fourteen"
+    t.string "n_fiveteen"
+    t.string "n_sixteen"
+    t.string "n_seventeen"
+    t.string "n_eighteen"
+    t.string "n_nineteen"
+    t.string "n_twenty"
+    t.string "n_twentyone"
+    t.string "n_twentytwo"
+    t.string "n_twentythree"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "agent_aux_id"
     t.index ["agent_aux_id"], name: "index_daily_productions_on_agent_aux_id"
   end
 
   create_table "regionals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "agent_aux_id"
     t.string "name", null: false
     t.integer "cod_regional", default: 0, null: false
     t.string "company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "agent_aux_id"
     t.index ["agent_aux_id"], name: "index_regionals_on_agent_aux_id"
   end
 
@@ -135,9 +135,6 @@ ActiveRecord::Schema.define(version: 20180526210056) do
   end
 
   create_table "total_productions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "segment_id"
-    t.bigint "year_month_id"
-    t.bigint "agent_aux_id"
     t.float "goal", limit: 24
     t.float "production_value", limit: 24
     t.float "goal_percent", limit: 24
@@ -145,6 +142,9 @@ ActiveRecord::Schema.define(version: 20180526210056) do
     t.float "remunaration_percent", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "agent_aux_id"
+    t.bigint "segment_id"
+    t.bigint "year_month_id"
     t.index ["agent_aux_id"], name: "index_total_productions_on_agent_aux_id"
     t.index ["segment_id"], name: "index_total_productions_on_segment_id"
     t.index ["year_month_id"], name: "index_total_productions_on_year_month_id"
@@ -156,11 +156,11 @@ ActiveRecord::Schema.define(version: 20180526210056) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "agent_auxes", "agent_auxes", column: "agent_id"
-  add_foreign_key "agent_auxes", "agent_auxes", column: "regional_id"
-  add_foreign_key "daily_productions", "daily_productions", column: "agent_aux_id"
-  add_foreign_key "regionals", "regionals", column: "agent_aux_id"
-  add_foreign_key "total_productions", "total_productions", column: "agent_aux_id"
-  add_foreign_key "total_productions", "total_productions", column: "segment_id"
-  add_foreign_key "total_productions", "total_productions", column: "year_month_id"
+  add_foreign_key "agent_auxes", "agents"
+  add_foreign_key "agent_auxes", "regionals"
+  add_foreign_key "daily_productions", "agent_auxes"
+  add_foreign_key "regionals", "agent_auxes"
+  add_foreign_key "total_productions", "agent_auxes"
+  add_foreign_key "total_productions", "segments"
+  add_foreign_key "total_productions", "year_months"
 end

@@ -20,10 +20,16 @@ $( document ).ready(function() {
       $("#agentsAll").prop('checked', false);
   });
 
+  $(".year_month").each(function() {
+    let yd = $(this).html();
+    let year = yd.substring(0,5);
+    let month = yd.substring(5);
+    $(this).html(''+month+'/'+year);
+  });
 
 
   $("#search").submit(function() {
-  
+
 
   });
 

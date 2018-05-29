@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 database1 = Mdb.open("#{Rails.root.to_s}/Cadastro.accdb")
 database2 = Mdb.open("#{Rails.root.to_s}/Producao.accdb")
 
@@ -64,10 +56,15 @@ agentsAux.each do |a|
     vr_comis_account: a[:VrComissãoConta]
   )
 
-
+  agent.regional = Regional.where(cod_regional: a[:CodRegional]).first
 
   if agent.valid?
-    agent = agent.save
+    if agent.role == "Gerente"
+      r = Regional.where(cod_regional: a[:CodRegional]).first
+      r.agent_aux = agent
+      r.save
+    end
+    agent.save
   end
 end
 
@@ -90,22 +87,42 @@ total_productions.each do |t|
     end
   end
 
+puts 'Transferindo Produção Diária'
+
   daily_productions = database2["ProduçãoDiária"]
+  n = database2["CalendárioCabeçalho"]
 
-  # daily_productions.each do |d|
-  #   daily_production = DailyProduction.new(d_one: d[:d01],
-  #     d_two: d[:d02], d_three: d[:d03], d_four: d[:d04], d_five: d[:d05],
-  #     d_six: d[:d06], d_seven: d[:d07], d_eight[:d08])
-  #   end
+  daily_productions.each do |d|
+    daily_production = DailyProduction.new( d_one: d[:d01],
+      d_two: d[:d02],       d_three: d[:d03],     d_four: d[:d04],    d_five: d[:d05],
+      d_six: d[:d06],       d_seven: d[:d07],     d_eight: d[:d08],   d_nine: d[:d09],
+      d_ten: d[:d10],       d_eleven: d[:d11],    d_twelve: d[:d12],  d_thirteen: d[:d13],
+      d_fourteen: d[:d14],  d_fiveteen: d[:d15],  d_sixteen: d[:d16], d_seventeen: d[:d17],
+      d_eighteen: d[:d18],  d_nineteen: d[:d19],  d_twenty: d[:d20],  d_twentyone: d[:d21],
+      d_twentytwo: d[:d22], d_twentythree: d[:d23],
+      n_one: n[0][:n01],       n_two: n[0][:n02],       n_three: n[0][:n03],   n_four: n[0][:n04],    n_five: n[0][:n05],
+      n_six: n[0][:n06],       n_seven: n[0][:n07],     n_eight: n[0][:n08],   n_nine: n[0][:n09],
+      n_ten: n[0][:n10],       n_eleven: n[0][:n11],    n_twelve: n[0][:n12],  n_thirteen: n[0][:n13],
+      n_fourteen: n[0][:n14],  n_fiveteen: n[0][:n15],  n_sixteen: n[0][:n16], n_seventeen: n[0][:n17],
+      n_eighteen: n[0][:n18],  n_nineteen: n[0][:n19],  n_twenty: n[0][:n20],  n_twentyone: n[0][:n21],
+      n_twentytwo: n[0][:n22], n_twentythree: n[0][:n23])
 
-  a = Agent.new(name: "CLEIDIR ANICETO DE SENA", email: "juliocosta@gmail.com", password: "12345678", key_j: "J9638258", cpf: "04443276578", role: "Agente");
-  b = Agent.new(name: "RAFAEL DE OLIVEIRA COMARU", email: "rafael@gmail.com", password: "12345678", key_j: "J0000002", cpf: "0432316534", role: "Gerente");
-  c = Agent.new(name: "Pedro Farias", email: "rafael@gmail.com", password: "12345678", key_j: "A12345678", cpf: "04443263782", role: "Diretor");
+      daily_production.agent_aux = AgentAux.where(key_j: d[:"Chave J"]).first
+
+      if daily_production.valid?
+        daily_production.save
+      end
+
+    end
+
+    a = Agent.new(name: "CLEIDIR ANICETO DE SENA", email: "juliocosta2@gmail.com", password: "12345678", key_j: "J9638258", cpf: "04443276578", role: "Agente")
+    b = Agent.new(name: "RAFAEL DE OLIVEIRA COMARU", email: "rafael@gmail.com", password: "12345678", key_j: "J0000002", cpf: "04323165343", role: "Gerente")
+    c = Agent.new(name: "Pedro Farias", email: "rafael31@gmail.com", password: "12345678", key_j: "A1234567", cpf: "04443263782", role: "Diretor")
 
 
-  b.agent_aux = AgentAux.where(key_j: b.key_j).first
+    b.agent_aux = AgentAux.where(key_j: b.key_j).first
 
 
-  a.save
-  b.save
-  c.save
+    a.save
+    b.save
+    c.save

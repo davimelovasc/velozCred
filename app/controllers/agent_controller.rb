@@ -7,12 +7,21 @@ class AgentController < ApplicationController
 
 
   def index
-    @agents = AgentAux.all
+    if current_agent.role == "Diretor" || current_agent.role == "Administrador"
+      @agents = AgentAux.all
+    elsif current_agent.role == "Gerente"
+      aux = AgentAux.where(key_j: current_agent.key_j).first
+      @agents = AgentAux.where(regional: aux.regional)
+    elsif current_agent.role == "Agente"
+      @agents = AgentAux.where(key_j: current_agent.key_j)
+    end
+
     @agents = @agents.order(:name)
     @regionals = Regional.all
     @segments = Segment.all
-    @year_months = TotalProduction.select(:year_month).distinct
-    @roles = ["Agente", "Assistente", "Gerente", "Supervisor"]
+    @year_months = YearMonth.all
+    @year_months = @year_months.order(year_month: :desc)
+    @roles = AgentAux.select(:role).distinct
 
   end
 
