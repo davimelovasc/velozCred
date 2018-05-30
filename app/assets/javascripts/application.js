@@ -17,4 +17,5 @@
 //= require turbolinks
 //= require dataTables/jquery.dataTables
 //= require dataTables/extras/dataTables.responsive
+//= require js/pace.min
 //= require_tree .

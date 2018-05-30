@@ -1,0 +1,72 @@
+<% if @total_productions != nil %>
+<table class="table table-sm display responsive no-wrap" width="100%" id="totalProductionTable">
+  <thead>
+    <tr>
+      <th>Agente</th>
+      <th>Cargo</th>
+      <th>Regional</th>
+      <th>Segmento</th>
+      <th>Ano/Mês</th>
+      <th>Produção</th>
+      <th>Remuneração</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @total_productions.each do |t| %>
+    <tr>
+      <td><%= t.agent_aux.name %></td>
+      <td><%= t.agent_aux.role %></td>
+      <td><%= t.agent_aux.regional.name %></td>
+      <td><%= t.segment.segment %></td>
+      <td class="year_month"><%= t.year_month.year_month %></td>
+      <td><%= t.production_value %></td>
+      <td><%= t.remuneration %></td> <!-- WARNING name incorrect -->
+    </tr>
+    <% end %>
+
+  </tbody>
+
+<script type="text/javascript">
+$('#totalProductionTable').DataTable({
+  'responsive': true,
+  'paging': false,
+  'info': false,
+  'searching': true,
+  'scrollY': '79.2vh',
+  'scrollCollapse': true,
+  "ordering": true,
+  "aoColumnDefs": [
+    { "bSortable": false, "aTargets": [ 0 ] }
+  ],
+  "language": {
+    "sEmptyTable": "Nenhum registro encontrado",
+    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+    "sInfoPostFix": "",
+    "sInfoThousands": ".",
+    "sLengthMenu": "_MENU_ resultados por página",
+    "sLoadingRecords": "Carregando...",
+    "sProcessing": "Processando...",
+    "sZeroRecords": "Nenhum registro encontrado",
+    "search": "_INPUT_",
+    "searchPlaceholder": "Pesquisar...",
+    "oPaginate": {
+      "sNext": "Próximo",
+      "sPrevious": "Anterior",
+      "sFirst": "Primeiro",
+      "sLast": "Último"
+    },
+    "oAria": {
+      "sSortAscending": ": Ordenar colunas de forma ascendente",
+      "sSortDescending": ": Ordenar colunas de forma descendente"
+    }
+  }
+
+
+});
+</script>
+
+
+
+  <% end %>

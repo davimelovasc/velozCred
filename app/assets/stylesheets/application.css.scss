@@ -16,6 +16,7 @@
 */
 
 @import "bootstrap";
+@import "css/pace";
 
 html, body {
   height: 100%;
@@ -84,4 +85,9 @@ td {
   background-color: #0000aa !important;
   border-color: #0000aa !important;
   transition: background-color .5s;
+}
+
+
+.hid {
+  visibility: hidden;
 }

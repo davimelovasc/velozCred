@@ -1,7 +1,7 @@
 class AgentController < ApplicationController
   before_action :set_agent, only: [:edit, :update]
   before_action :require_same_agent, only: [:edit, :update]
-  before_action :authenticate_agent!, only: [:edit, :update, :index, :update_db]
+  before_action :authenticate_agent!
   before_action :require_director, only: [:update_db]
   layout :resolve_layout
 
@@ -40,16 +40,15 @@ class AgentController < ApplicationController
   end
 
   def search
+    agents_ids = params[:agents]
+    segments_ids = params[:segments]
+    year_months_ids = params[:year_months]
+
     if params[:commit] == 'Produção Diaria'
 
 
-
-
     elsif params[:commit] == 'Produção Total'
-
-
-
-
+      @total_productions = TotalProduction.where(agent_aux_id: agents_ids, segment_id: segments_ids, year_month_id: year_months_ids)
     end
   end
 
@@ -85,8 +84,10 @@ class AgentController < ApplicationController
     if current_agent.role == "Diretor" || current_agent.role == "Admin"
 
 
-      database = Mdb.open("#{Rails.root.to_s}/Cadastro.accdb")
-      agents = database["Agentes"]
+      database1 = Mdb.open("#{Rails.root.to_s}/Cadastro.accdb")
+      database2 = Mdb.open("#{Rails.root.to_s}/Producao.accdb")
+
+      agents = database1["Agentes"]
 
       agents.each do |a|
         @agent = AgentAux.new( account: a[:Conta],
@@ -114,8 +115,6 @@ class AgentController < ApplicationController
 
       end
 
-
-      database2 = Mdb.open("#{Rails.root.to_s}/Producao.accdb")
       segments = database2["Segmentos"]
 
       segments.each do |s|

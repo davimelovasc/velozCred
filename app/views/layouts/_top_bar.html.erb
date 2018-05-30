@@ -1,8 +1,10 @@
 <header>
-
-  <%= link_to "Sair", destroy_agent_session_path, method: :delete, class: "float-md-right",style: "margin-right: 2%;" %>
+  <% if action_name == "search" %>
+  <%= link_to 'Voltar', 'javascript:history.back()' %>
+  <% end %>
+  <%= link_to "Sair", destroy_agent_session_path, method: :delete, class: "float-md-right",style: "margin-right: 2%;", data: {confirm: "Você tem certeza que deseja encerrar sua sessão?"} %>
   <% if current_agent.role == "Admin" || current_agent.role == "Diretor" %>
-    <%= link_to "Atualizar Banco de Dados", update_db_path, class: "float-md-right" %>
+  <%= link_to "Atualizar Banco de Dados", update_db_path, class: "float-md-right" %>
   <% end %>
   <%= link_to "Redefinir Senha", change_password_path(current_agent.id), class: "float-md-right" %>
 </header>

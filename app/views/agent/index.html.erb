@@ -17,11 +17,14 @@
               </tr>
             </thead>
             <tbody>
-
+              <tr>
+                <td class="wrapper_col"><input name="year_months[]" type="checkbox" id="year_monthsAll"></td>
+                <td><label for="year_monthsAll">Todos (as)</label></td>
+              </tr>
               <% @year_months.each do |r| %>
               <tr>
                 <td class="wrapper_col"><input name="year_months[]" type="checkbox" value="<%= r.id %>" id="<%= r.year_month %>"> </td>
-                <td> <label for="<%= r.year_month %>" class="year_month" > <%= r.year_month %>  </label></td>
+                <td> <label for="<%= r.year_month %>" class="year_month" ><%= r.year_month %>  </label></td>
               </tr>
               <% end %>
             </tbody>
@@ -43,13 +46,19 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td class="wrapper_col"><input name="roles[]" type="checkbox" id="rolesAll"></td>
+                <td><label for="rolesAll">Todos (as)</label></td>
+              </tr>
               <% @roles.each do |r| %>
+              <% if r.role != "Total" %>
               <tr>
                 <td class="wrapper_col">
-                  <input name="roles[]" type="checkbox" value="<%= r.role %>" id="<%= r.role %>">
+                  <input name="roles[]" type="checkbox" value="<%= r.role %>" id="<%= r.role %>" class="role">
                 </td>
                 <td> <label for="<%= r.role %>" > <%= r.role %>  </label></td>
               </tr>
+              <% end %>
               <% end %>
             </tbody>
           </table>
@@ -75,6 +84,10 @@
             </thead>
             <tbody>
 
+              <tr>
+                <td class="wrapper_col"><input name="segments[]" type="checkbox" id="segmentsAll"></td>
+                <td><label for="segmentsAll">Todos (as)</label></td>
+              </tr>
               <% @segments.each do |r| %>
               <tr>                                                                      <!--r.id -->
                 <td class="wrapper_col"><input name="segments[]" type="checkbox" value="<%= r.id %>" id="<%= r.segment %>"> </td>
@@ -93,7 +106,7 @@
       <!--    SO SE FOR DIRETOR     -->
       <% if current_agent.role == "Diretor" || current_agent.role == "Administrador" %>
       <div class="row h-50 mt-2">
-        <div class="col-md-12">
+        <div class="col-md-12 hid" id="regional-div">
           <h3>Regionais</h3>
 
           <table class="table table-sm display responsive no-wrap" width="100%" id="regionalsTable">
@@ -105,14 +118,16 @@
             </thead>
             <tbody>
               <tr>
-                <td class="wrapper_col"><input name="regionals[]" type="checkbox" id="regionalsAll" value="*"></td>
+                <td class="wrapper_col"><input name="regionals[]" type="checkbox" id="regionalsAll"></td>
                 <td><label for="regionalsAll">Todos (as)</label></td>
               </tr>
               <% @regionals.each do |r| %>
+              <% if r.name != "TOTAL" %>
               <tr>
-                <td class="wrapper_col"><input name="regionals[]" type="checkbox" value="<%= r.name %>" id="<%= r.name %>"> </td>
+                <td class="wrapper_col"><input name="regionals[]" type="checkbox" value="<%= r.name %>" id="<%= r.name %>" class="regional"> </td>
                 <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
               </tr>
+              <% end %>
               <% end %>
             </tbody>
           </table>
@@ -135,15 +150,22 @@
         </thead>
         <tbody>
           <tr>
-            <td class="wrapper_col"><input name="agents[]" type="checkbox" id="agentsAll" value="*"></td>
+            <td class="wrapper_col"><input name="agents[]" type="checkbox" id="agentsAll"></td>
             <td><label for="agentsAll">Todos (as)</td>
             </tr>
             <% @agents.each do |r| %>
+            <% if r.role != "Regional" %>
+            <% if r.role == "Gerente" %>
+            <td class="wrapper_col"><input name="agents[]" type="checkbox" id="<%= r.name %>" value="<%= r.id %>" class="Gerente <%= r.regional.name %>"></td>
+            <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
+            <% else %>
             <tr>
-              <td class="wrapper_col"><input name="agents[]" type="checkbox" id="<%= r.name %>" value="<%= r.id %>" ></td>
+              <td class="wrapper_col"><input name="agents[]" type="checkbox" id="<%= r.name %>" value="<%= r.id %>" class="<%=r.role%>" ></td>
               <td> <label for="<%= r.name %>" > <%= r.name %>  </label></td>
             </tr>
-            <% end %>
+            <% end %> <!--end if gerente  -->
+            <% end %> <!--end if regional -->
+            <% end %> <!--end if each -->
           </tbody>
         </table>
 
@@ -167,6 +189,7 @@
   </div>
 
   <% end %>
+
 
 
   <script type="text/javascript">
