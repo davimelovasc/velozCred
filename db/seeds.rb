@@ -46,7 +46,7 @@ agentsAux.each do |a|
     cost_help: a[:AjudaCusto],
     ctps_cda: a[:"CTPS/CDA"],
     discount: a[:Descontos],
-    extra: a[:Acrescimos],
+    extra: a[:Acréscimos],
     key_j: a[:ChaveJ],
     name: a[:NOME],
     obs: a[:Observação],
@@ -61,7 +61,7 @@ agentsAux.each do |a|
   if agent.valid?
     if agent.role == "Gerente"
       r = Regional.where(cod_regional: a[:CodRegional]).first
-      r.agent_aux = agent
+      r.manager = agent
       r.save
     end
     agent.save

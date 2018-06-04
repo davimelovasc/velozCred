@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   root  to: 'agent#index'
 
+  get "/", to: 'agent#index'
   get '/index', to: 'agent#index'
   post '/search', to: 'agent#search'
 
