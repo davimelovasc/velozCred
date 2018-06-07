@@ -87,7 +87,10 @@ td {
   transition: background-color .5s;
 }
 
-
 .hid {
   visibility: hidden;
+}
+
+#flash_alert {
+  color: #cc0000;
 }

@@ -10,8 +10,6 @@ Rails.application.routes.draw do
   end
 
   root  to: 'agent#index'
-
-  get "/", to: 'agent#index'
   get '/index', to: 'agent#index'
   post '/search', to: 'agent#search'
 
@@ -21,5 +19,7 @@ Rails.application.routes.draw do
   get '/total_productions', to: 'total_productions#index'
 
   get '/update_db', to: 'agent#update_db'
+
+  post '/save_archive', to: 'archives#create'
 
 end

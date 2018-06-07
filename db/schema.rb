@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180529011343) do
+ActiveRecord::Schema.define(version: 20180606205018) do
 
   create_table "agent_auxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
@@ -57,6 +57,47 @@ ActiveRecord::Schema.define(version: 20180529011343) do
     t.index ["uid", "provider"], name: "index_agents_on_uid_and_provider", unique: true
   end
 
+  create_table "archives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "total_production_file_name"
+    t.string "total_production_content_type"
+    t.integer "total_production_file_size"
+    t.datetime "total_production_updated_at"
+    t.string "register_file_name"
+    t.string "register_content_type"
+    t.integer "register_file_size"
+    t.datetime "register_updated_at"
+  end
+
+  create_table "calendars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "n_one"
+    t.string "n_two"
+    t.string "n_three"
+    t.string "n_four"
+    t.string "n_five"
+    t.string "n_six"
+    t.string "n_seven"
+    t.string "n_eight"
+    t.string "n_nine"
+    t.string "n_ten"
+    t.string "n_eleven"
+    t.string "n_twelve"
+    t.string "n_thirteen"
+    t.string "n_fourteen"
+    t.string "n_fiveteen"
+    t.string "n_sixteen"
+    t.string "n_seventeen"
+    t.string "n_eighteen"
+    t.string "n_nineteen"
+    t.string "n_twenty"
+    t.string "n_twentyone"
+    t.string "n_twentytwo"
+    t.string "n_twentythree"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "daily_productions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.float "goal", limit: 24
     t.float "value", limit: 24
@@ -88,29 +129,6 @@ ActiveRecord::Schema.define(version: 20180529011343) do
     t.float "d_twentyone", limit: 24
     t.float "d_twentytwo", limit: 24
     t.float "d_twentythree", limit: 24
-    t.string "n_one"
-    t.string "n_two"
-    t.string "n_three"
-    t.string "n_four"
-    t.string "n_five"
-    t.string "n_six"
-    t.string "n_seven"
-    t.string "n_eight"
-    t.string "n_nine"
-    t.string "n_ten"
-    t.string "n_eleven"
-    t.string "n_twelve"
-    t.string "n_thirteen"
-    t.string "n_fourteen"
-    t.string "n_fiveteen"
-    t.string "n_sixteen"
-    t.string "n_seventeen"
-    t.string "n_eighteen"
-    t.string "n_nineteen"
-    t.string "n_twenty"
-    t.string "n_twentyone"
-    t.string "n_twentytwo"
-    t.string "n_twentythree"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "agent_aux_id"

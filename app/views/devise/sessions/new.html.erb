@@ -1,7 +1,18 @@
-<div class="center">
+<div class="center full">
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f| %>
   <%= image_tag("logo.jpg", class:"mb-4 logo", width: "100%", height: "72") %>
+
+  <%- flash.each do |name, msg| -%>
+  <% if msg != 'Para continuar, efetue login.' %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: -10px;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+  </div>
+  <%- end -%>
+  <%- end -%>
 
   <%= f.label :key_j, class: 'sr-only' %>
   <%= f.email_field :key_j, autofocus: true, type: 'text', id: 'inputEmail', class: 'form-control mb-2', placeholder: 'Chave J', required: 'true', maxlength: '8', style: 'text-transform: uppercase;' %>
