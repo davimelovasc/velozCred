@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606205018) do
+ActiveRecord::Schema.define(version: 20180606142251) do
 
   create_table "agent_auxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
@@ -55,19 +55,6 @@ ActiveRecord::Schema.define(version: 20180606205018) do
     t.index ["email"], name: "index_agents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_agents_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_agents_on_uid_and_provider", unique: true
-  end
-
-  create_table "archives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "total_production_file_name"
-    t.string "total_production_content_type"
-    t.integer "total_production_file_size"
-    t.datetime "total_production_updated_at"
-    t.string "register_file_name"
-    t.string "register_content_type"
-    t.integer "register_file_size"
-    t.datetime "register_updated_at"
   end
 
   create_table "calendars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

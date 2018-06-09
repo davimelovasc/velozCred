@@ -12,19 +12,19 @@ class ArchivesController < ApplicationController
       register = archives["register"]
 
 
-      database1 = Mdb.open(@register.tempfile)
-      database2 = Mdb.open(@total_production.tempfile)
+      database1 = Mdb.open(register.tempfile)
+      database2 = Mdb.open(total_production.tempfile)
 
       if database1 != nil && database2 != nil
-        AgentController.update_db(database1, database2)
-
+        AgentsController.update_db(database1, database2)
+        redirect_to index_path
       end
 
+      redirect_to index_path
+
     end
 
-    private
-    def archive_params
-      params.require(:archive).permit(:total_production, :register)
-    end
+  end
+
 
   end

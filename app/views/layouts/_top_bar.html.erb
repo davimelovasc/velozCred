@@ -10,7 +10,7 @@
 </header>
 
 <% if current_agent.role == "Adm" %>
-<%= form_for Archive.new, url: save_archive_path do |f| %>
+<%= form_for :archive, url: save_archive_path do |f| %>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
