@@ -65,18 +65,6 @@ $( document ).ready(function() {
   });
 
 
-
-
-  $(".year_month").each(function() {
-    let yd = $(this).html();
-    let year = yd.substring(0,4);
-    let month = yd.substring(4);
-    $(this).html(''+month+' / '+year);
-  });
-
-
-
-
   $(".regional").change(function() {
     var a = $(this).val();
     if(a.indexOf(' ') >= 0 ) {
@@ -106,6 +94,15 @@ $( document ).ready(function() {
     } else {
       $("#regionalsAll").prop('checked', false);
       $("#regional-div").addClass("hid");
+    }
+  });
+
+
+  $("#update_total_prod").change(function() {
+    if( $(this).is(':checked') ){
+      $("#year_months_div").removeClass("none");
+    } else {
+      $("#year_months_div").addClass("none");
     }
   });
 

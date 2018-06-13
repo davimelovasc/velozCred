@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   #include DeviseTokenAuth::Concerns::SetUserByToken
+  before_action :set_ym
   layout :layout_by_resource
 
   def after_sign_in_path_for(resource)
@@ -21,6 +22,11 @@ class ApplicationController < ActionController::Base
       "application"
     end
 
+  end
+
+  def set_ym
+    @ym = YearMonth.all
+    @ym = @ym.order(year_month: :desc)
   end
 
 end

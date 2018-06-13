@@ -17,4 +17,11 @@ $( document ).ready(function() {
     $(this).html(texto.substring(3));
   });
 
+  $(".year_month").each(function() {
+    let yd = $(this).html();
+    let year = yd.substring(0,4);
+    let month = yd.substring(4);
+    $(this).html(''+month+' / '+year);
+  });
+
 });

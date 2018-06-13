@@ -7,7 +7,7 @@ class ArchivesController < ApplicationController
 
     archives = params[:archive]
 
-    if archives["total_production"] != nil && archives["register"] != nil
+    if archives != nil && archives["total_production"] != nil && archives["register"] != nil
       total_production = archives["total_production"]
       register = archives["register"]
 
@@ -16,13 +16,14 @@ class ArchivesController < ApplicationController
       database2 = Mdb.open(total_production.tempfile)
 
       if database1 != nil && database2 != nil
-        AgentsController.update_db(database1, database2)
-        redirect_to index_path
+        year_months = params[:year_months]
+        update_tp = params[:update_tp]
+        AgentsController.update_db(database1, database2, year_months, update_tp)
       end
 
-      redirect_to index_path
-
     end
+
+    redirect_to index_path
 
   end
 

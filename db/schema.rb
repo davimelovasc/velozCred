@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20180606142251) do
 
   create_table "segments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "segment", null: false
-    t.integer "ord_segment"
+    t.integer "cod_segment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

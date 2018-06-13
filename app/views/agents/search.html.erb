@@ -8,9 +8,9 @@
       <th>Ano/Mês</th>
       <th>Segmento</th>
       <th>Produção</th>
-      <th>Atingimento %</th>
+      <th>Ating. %</th>
       <th>Remuneração</th>
-      <th>Remuneração %</th>
+      <th>Remune. %</th>
     </tr>
   </thead>
   <tbody>
@@ -21,10 +21,10 @@
       <td><%= t.agent_aux.regional.name %></td>
       <td class="year_month"><%= t.year_month.year_month %></td>
       <td><%= t.segment.segment %></td>
-      <td class="real"><%= t.production_value %></td>
-      <td class="percent"><%= t.goal_percent %></td>
-      <td class="real"><%= t.remuneration %></td>
-      <td class="percent"><%= t.remunaration_percent %></td>
+      <td class="real text-md-right"><%= t.production_value %></td>
+      <td class="percent text-md-right"><%= t.goal_percent %></td>
+      <td class="real text-md-right"><%= t.remuneration %></td>
+      <td class="percent text-md-right"><%= t.remunaration_percent %></td>
     </tr>
     <% end %>
 
@@ -80,7 +80,7 @@ $('#totalProductionTable').DataTable({
       <% @calendar.attributes.each do |key, val| %>
       <% next if key == "id" %>
       <% break if val.nil? %>
-      <th><%= val %> </th>
+      <th class="text-md-right"><%= val %> </th>
       <% cont += 1 %>
       <% end %>
     </tr>
@@ -97,15 +97,15 @@ $('#totalProductionTable').DataTable({
       <td><%= t.agent_aux.role %></td>
       <td><%= t.agent_aux.regional.name %></td>
 
-      <% if cont > 0 %><td class="real"><%= t.d_one %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_two %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_three %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_four %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_five %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_six %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_seven %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_eight %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_nine %></td><% end %><% cont -= 1 %>
+      <% if cont > 0 %><td class="real text-md-right"><%= t.d_one %></td><% end %><% cont -= 1 %>
+      <% if cont > 0 %><td class="real text-md-right"><%= t.d_two %></td><% end %><% cont -= 1 %>
+      <% if cont > 0 %><td class="real text-md-right"><%= t.d_three %></td><% end %><% cont -= 1 %>
+      <% if cont > 0 %><td class="real text-md-right"><%= t.d_four %></td><% end %><% cont -= 1 %>
+      <% if cont > 0 %><td class="real text-md-right"><%= t.d_five %></td><% end %><% cont -= 1 %>
+      <% if cont > 0 %><td class="real text-md-right"><%= t.d_six %></td><% end %><% cont -= 1 %>
+      <% if cont > 0 %><td class="real text-md-right"><%= t.d_seven %></td><% end %><% cont -= 1 %>
+      <% if cont > 0 %><td class="real text-md-right"><%= t.d_eight %></td><% end %><% cont -= 1 %>
+      <% if cont > 0 %><td class="real text-md-right"><%= t.d_nine %></td><% end %><% cont -= 1 %>
       <% if cont > 0 %><td class="real"><%= t.d_ten %></td><% end %><% cont -= 1 %>
       <% if cont > 0 %><td class="real"><%= t.d_eleven %></td><% end %><% cont -= 1 %>
       <% if cont > 0 %><td class="real"><%= t.d_twelve %></td><% end %><% cont -= 1 %>
