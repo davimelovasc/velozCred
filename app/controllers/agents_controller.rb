@@ -48,8 +48,19 @@ class AgentsController < ApplicationController
     year_months_ids = params[:year_months]
 
     if params[:commit] == 'Produção Diaria'
-      @calendar = Calendar.first
+      @calendar = Calendar.first.attributes.select {|key, val| val != nil }.except("id", "created_at", "updated_at")
+
+      Regional.all.each do |r|
+        if agents_ids.include?((r.manager.id).to_s)
+          reg = AgentAux.where(name: r.name.upcase, role: 'Regional').last
+          if not reg.nil?
+            agents_ids = agents_ids.push(reg.id)
+          end
+        end
+      end
+
       @daily_productions = DailyProduction.where(agent_aux_id: agents_ids)
+
     elsif params[:commit] == 'Produção Total'
       @total_productions = TotalProduction.where(agent_aux_id: agents_ids, segment_id: segments_ids, year_month_id: year_months_ids)
     end

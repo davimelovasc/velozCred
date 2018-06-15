@@ -12,9 +12,12 @@ $( document ).ready(function() {
 
   $(".real").each(function() {
     var valor = parseFloat( $(this).html() );
-    var texto = valor.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"});
+    
+    if (valor) {
+      var texto = valor.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"});
+      $(this).html(texto.substring(3));
+    }
 
-    $(this).html(texto.substring(3));
   });
 
   $(".year_month").each(function() {

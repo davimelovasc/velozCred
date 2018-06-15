@@ -18,4 +18,6 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/extras/dataTables.responsive
 //= require js/pace.min
+//= require js/dataTables.fixedColumns.min
+//= require js/numeric-comma
 //= require_tree .

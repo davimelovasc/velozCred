@@ -17,6 +17,7 @@
 
 @import "bootstrap";
 @import "css/pace";
+@import "css/fixedColumns.dataTables.min";
 
 html, body {
   height: 100%;
@@ -97,4 +98,8 @@ td {
 
 .none {
   display: none;
+}
+
+.d_width {
+  min-width: 95px !important; 
 }

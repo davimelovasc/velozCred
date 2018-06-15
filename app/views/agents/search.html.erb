@@ -10,7 +10,7 @@
       <th>Produção</th>
       <th>Ating. %</th>
       <th>Remuneração</th>
-      <th>Remune. %</th>
+      <th>Remun. %</th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +33,7 @@
 
 <script type="text/javascript">
 $('#totalProductionTable').DataTable({
+  'fixedHeader': true,
   'responsive': true,
   'paging': false,
   'info': false,
@@ -70,99 +71,98 @@ $('#totalProductionTable').DataTable({
 </script>
 
 <% elsif  @daily_productions != nil %>
-<% cont = 0 %>
-<table class="table table-lg" width="100%" id="dailyProductionTable">
+<%  cont = 0 %>
+<table class="stripe row-border order-column" width="100%" id="dailyProductionTable">
   <thead>
-    <tr>
-      <th>Agente</th>
-      <th>Cargo</th>
-      <th>Regional</th>
-      <% @calendar.attributes.each do |key, val| %>
-      <% next if key == "id" %>
-      <% break if val.nil? %>
-      <th class="text-md-right"><%= val %> </th>
-      <% cont += 1 %>
-      <% end %>
-    </tr>
+    <th style="min-width: 200px;">Agente</th>
+    <th>Cargo</th>
+    <th>Regional</th>
+    <% @calendar.each_with_index do |(key, val), i| %>
+    <th class="text-right"><%= (val).to_f.floor %></th>
+    <% cont = cont + 1 %>
+    <% end %>
   </thead>
   <tbody>
     <% contAux = cont %>
     <% @daily_productions.each do |t| %>
-    <% if t.agent_aux.name == "TOTAL" %>
-     <% next %>
-    <% end %>
-
+    <% cont = contAux %>
     <tr>
       <td><%= t.agent_aux.name %></td>
       <td><%= t.agent_aux.role %></td>
       <td><%= t.agent_aux.regional.name %></td>
-
-      <% if cont > 0 %><td class="real text-md-right"><%= t.d_one %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real text-md-right"><%= t.d_two %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real text-md-right"><%= t.d_three %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real text-md-right"><%= t.d_four %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real text-md-right"><%= t.d_five %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real text-md-right"><%= t.d_six %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real text-md-right"><%= t.d_seven %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real text-md-right"><%= t.d_eight %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real text-md-right"><%= t.d_nine %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_ten %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_eleven %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_twelve %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_thirteen %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_fourteen %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_fiveteen %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_sixteen %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_seventeen %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_eighteen %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_nineteen %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_twenty %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_twentyone %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_twentytwo %></td><% end %><% cont -= 1 %>
-      <% if cont > 0 %><td class="real"><%= t.d_twentythree %></td><% end %><% cont -= 1 %>
-
-      <% cont = contAux %>
-
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_one %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_two %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_three %></td><% cont = cont - 1 %><% else next %>><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_four %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_five %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_six %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_seven %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_eight %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_nine %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_ten %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_eleven %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_twelve %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_thirteen %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_fourteen %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_fiveteen %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_sixteen %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_seventeen %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_eighteen %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_nineteen %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_twenty %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_twentyone %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_twentytwo %></td><% cont = cont - 1 %><% else next %><% end %>
+      <% if cont > 0 %><td class="text-right d_width real"><%= t.d_twentythree %></td><% cont = cont - 1 %><% else next %><% end %>
     </tr>
     <% end %>
   </tbody>
 </table>
 <script type="text/javascript">
-$('#dailyProductionTable').DataTable({
-  'responsive': true,
-  'paging': false,
-  'info': false,
-  'searching': true,
-  'scrollY': '79.2vh',
-  'scrollCollapse': true,
-  "ordering": true,
-  "language": {
-    "sEmptyTable": "Nenhum registro encontrado",
-    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-    "sInfoPostFix": "",
-    "sInfoThousands": ".",
-    "sLengthMenu": "_MENU_ resultados por página",
-    "sLoadingRecords": "Carregando...",
-    "sProcessing": "Processando...",
-    "sZeroRecords": "Nenhum registro encontrado",
-    "search": "_INPUT_",
-    "searchPlaceholder": "Pesquisar...",
-    "oPaginate": {
-      "sNext": "Próximo",
-      "sPrevious": "Anterior",
-      "sFirst": "Primeiro",
-      "sLast": "Último"
+$(document).ready(function() {
+  $('#dailyProductionTable').DataTable({
+    'scrollY':        '79.2vh',
+    'scrollX':        true,
+    'scrollCollapse': true,
+    'paging':         false,
+    'info': false,
+    'scrollCollapse': true,
+    "ordering": true,
+    'fixedColumns':   {
+      leftColumns: 1
     },
-    "oAria": {
-      "sSortAscending": ": Ordenar colunas de forma ascendente",
-      "sSortDescending": ": Ordenar colunas de forma descendente"
+    "columnDefs": [
+                { "type": "numeric-comma", 'targets': 'real' }
+            ],
+    "language": {
+      "sEmptyTable": "Nenhum registro encontrado",
+      "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+      "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+      "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+      "sInfoPostFix": "",
+      "sInfoThousands": ".",
+      "sLengthMenu": "_MENU_ resultados por página",
+      "sLoadingRecords": "Carregando...",
+      "sProcessing": "Processando...",
+      "sZeroRecords": "Nenhum registro encontrado",
+      "search": "_INPUT_",
+      "searchPlaceholder": "Pesquisar...",
+      "decimal": ",",
+      "thousands": ".",
+      "oPaginate": {
+        "sNext": "Próximo",
+        "sPrevious": "Anterior",
+        "sFirst": "Primeiro",
+        "sLast": "Último"
+      },
+      "oAria": {
+        "sSortAscending": ": Ordenar colunas de forma ascendente",
+        "sSortDescending": ": Ordenar colunas de forma descendente"
+      }
     }
-  }
-
+  } );
 
 });
+
 </script>
 
 

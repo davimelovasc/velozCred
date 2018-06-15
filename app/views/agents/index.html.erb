@@ -51,7 +51,7 @@
                 <td><label for="rolesAll">Todos (as)</label></td>
               </tr>
               <% @roles.each do |r| %>
-              <% if r.role != "Total" && r.role != "Adm" && r.role != "Gestor" %>
+              <% if r.role != "Total" && r.role != "Adm" && r.role != "Gestor" && r.role != "Regional"%>
               <tr>
                 <td class="wrapper_col">
                   <input name="roles[]" type="checkbox" value="<%= r.role %>" id="<%= r.role %>" class="role">
