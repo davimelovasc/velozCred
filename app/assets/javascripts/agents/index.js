@@ -90,10 +90,10 @@ $( document ).ready(function() {
     if($(this).is(':checked')) {
       $("#regionalsAll").prop('checked', true);
       $(".regional").prop('checked', true);
-      $("#regional-div").removeClass("hid");
+      $("#regional-div").removeClass("none");
     } else {
       $("#regionalsAll").prop('checked', false);
-      $("#regional-div").addClass("hid");
+      $("#regional-div").addClass("none");
     }
   });
 
